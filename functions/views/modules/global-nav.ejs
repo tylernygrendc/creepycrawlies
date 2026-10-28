@@ -1,0 +1,41 @@
+<div id="toast" role="status" aria-live="polite" aria-atomic="false"></div>
+
+<button
+    id="button-toggle-primary-navigation"
+    class="fab icon"
+    aria-label="toggle primary navigation"
+    aria-expanded="false"
+>
+    menu
+</button>
+
+<nav
+    id="nav-primary-navigation"
+    aria-label="primary navigation"
+    data-expanded="false"
+>
+    <a class="metal" href="/">The Fang Farm</a>
+    <ul>
+        <li><a href="/catalog/inverts">Inverts</a></li>
+        <li><a href="/catalog/plants">Plants</a></li>
+        <li><a href="/catalog/biobasics">Biobasics</a></li>
+    </ul>
+</nav>
+
+<script>
+    document
+        .getElementById("button-toggle-primary-navigation")
+        .addEventListener("click", (e) => {
+            const button = e.currentTarget;
+            const nav = document.getElementById("nav-primary-navigation");
+            if (button.getAttribute("aria-expanded") === "true") {
+                button.setAttribute("aria-expanded", "false");
+                nav.setAttribute("data-expanded", "false");
+                button.innerText = "menu";
+            } else {
+                button.setAttribute("aria-expanded", "true");
+                nav.setAttribute("data-expanded", "true");
+                button.innerText = "keyboard_arrow_left";
+            }
+        });
+</script>

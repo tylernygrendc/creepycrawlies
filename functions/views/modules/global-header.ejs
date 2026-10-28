@@ -1,0 +1,36 @@
+<header>
+    <ul id="list-utilities">
+        <!-- <li>
+            <button
+                id="button-show-orders"
+                class="btn btn-secondary"
+                command="show-modal"
+                commandfor="cart-dialog"
+            >
+                Orders
+            </button>
+        </li> -->
+        <li>
+            <button
+                id="button-show-cart"
+                class="btn btn-secondary icon"
+                command="show-modal"
+                commandfor="cart-dialog"
+            >
+                shopping_cart
+            </button>
+        </li>
+    </ul>
+</header>
+
+<dialog id="cart-dialog">
+    <button
+        id="button-close-cart-dialog"
+        class="btn btn-text icon"
+        command="close"
+        commandfor="cart-dialog"
+    >
+        close
+    </button>
+    <%- include("cart.ejs") %>
+</dialog>

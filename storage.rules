@@ -1,0 +1,17 @@
+rules_version = '2';
+
+service firebase.storage {
+
+  match /b/{bucket}/o {
+
+    // Default lock-down for unspecified paths
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+  // Public read access for all storage folders
+  match /{allPaths=**} { // TODO specify route
+    allow read: if true;   // Anyone can view/download
+    allow write: if false;  // No client uploads/deletes allowed
+  }
+}

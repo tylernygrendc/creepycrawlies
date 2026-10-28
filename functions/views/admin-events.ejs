@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow, noarchive" />
+        <title>The Fang Farm</title>
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link
+            rel="icon"
+            href="/favicon-32x32.png"
+            type="image/png"
+            sizes="32x32"
+        />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+        <link rel="manifest" href="/manifest.json" />
+        <!-- styles -->
+        <link rel="stylesheet" href="styles/admin-events.css">
+    </head>
+    <body>
+
+        <%- include("./modules/admin-nav.ejs") %> 
+        
+        <header>
+            <h1>Manage Events</h1>
+        </header>
+        <!-- existing -->
+        <main>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Starts</th>
+                        <th>Ends</th>
+                        <th>Venue</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th aria-label="action"></th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-events">
+                    <% events.forEach((event) => { %>
+                        <% 
+                            // format dates
+                            if(event.startDate?.seconds) {
+                                event.startDate = new Date(event.startDate.seconds * 1000).toLocaleDateString("en-US",{
+                                    day: "2-digit",
+                                    month: "2-digit",
+                                    year: "numeric"
+                                }).replaceAll("/","-");
+                            }
+                            if(event.endDate?.seconds) {
+                                event.endDate = new Date(event.endDate.seconds * 1000).toLocaleDateString("en-US",{
+                                    day: "2-digit",
+                                    month: "2-digit",
+                                    year: "numeric"
+                                }).replaceAll("/","-");
+                            }
+                        %> 
+                        <tr id="<%= event.id %>" data-event="<%= JSON.stringify(event) %>">
+                            <td><%= event.name %></td>
+                            <td><%= event.startDate %></td>
+                            <td><%= event.endDate %></td>
+                            <td><%= event.venueName %></td>
+                            <td><%= event.city %></td>
+                            <td><%= event.state %></td>
+                            <td><button type="button" class="btn btn-secondary icon" aria-label="edit event">edit</button></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+            <!-- create new -->
+            <button id="button-add-event" type="button" class="btn btn-primary">Add an Event</button>
+        </main>
+
+        <dialog id="dialog-event-editor">
+            <button class="btn btn-secondary icon" aria-label="close dialog" command="close" commandfor="dialog-event-editor">close</button>
+            <form id="form-event-editor">
+                <input type="hidden" name="id">
+                <label>
+                    <span>Event</span>
+                    <input type="text" name="name" class="form-control"/>
+                </label>
+                <label>
+                    <span>Description</span>
+                    <textarea name="description" class="form-control"></textarea>
+                </label>
+                <label>
+                    <span>Starts</span>
+                    <input type="date" name="startDate" class="form-control"/>
+                </label>
+                <label>
+                    <span>Ends</span>
+                    <input type="date" name="endDate" class="form-control"/>
+                </label>
+                <label>
+                    <span>Venue</span>
+                    <input type="text" name="venueName" class="form-control"/>
+                </label>
+                <label>
+                    <span>Street</span>
+                    <input type="text" name="street" class="form-control"/>
+                </label>
+                <label>
+                    <span>City</span>
+                    <input type="text" name="city" class="form-control"/>
+                </label>
+                <label>
+                    <span>State</span>
+                    <input type="text" name="state" class="form-control"/>
+                </label>
+                <label>
+                    <span>ZIP</span>
+                    <input type="text" name="zip" class="form-control"/>
+                </label>
+                <label>
+                    <span>Organizer</span>
+                    <input type="text" name="organizer" class="form-control"/>
+                </label>
+                <label>
+                    <span>Website</span>
+                    <input type="text" name="website" class="form-control"/>
+                </label>
+                <label>
+                    <span>Directions</span>
+                    <input type="text" name="mapsLink" class="form-control" placeholder="https://maps.app.goo.gl/..."/>
+                </label>
+                <button id="button-save-event" type="submit" name="save-event" class="btn btn-primary">Save Event</button>
+                <button type="button" popovertarget="event-editor-menu" aria-label="more options" class="btn btn-secondary icon">more_vert</button>
+                <menu id="menu-event-editor" popover>
+                    <li><button type="button" name="cancel-event" class="btn btn-secondary">Cancel Event</button></li>
+                </menu>
+            </form>
+        </dialog>
+
+        <script src="/scripts/admin-events.min.js"></script>
+    </body>
+</html>

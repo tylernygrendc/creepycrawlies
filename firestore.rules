@@ -1,0 +1,17 @@
+rules_version='2'
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default lock-down rule for any unmapped paths
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Public read access for your collections
+    match /items/{document} {
+      allow read: if true;   // Allows 'get' and 'list' queries from client SDK
+      allow write: if false;  // Prevents direct writes from the browser
+    }
+  }
+}

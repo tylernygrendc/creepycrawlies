@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>The Fang Farm</title>
+        <meta name="description" content="" />
+        <!-- open graph card -->
+        <meta property="og:title" content="" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="" />
+        <meta property="og:image" content="" />
+        <meta property="og:description" content="" />
+        <meta property="og:site_name" content="" />
+        <!-- styles -->
+        <link rel="stylesheet" href="styles/events.css">
+    </head>
+    <body>
+        <%- include("modules/primary-navigation")  %> 
+        <main>
+            <h1>Upcoming Events</h1>
+            <ol>
+                <% Array.from(new Set(events.map(event => new Date(event.startDate.seconds * 1000).toLocaleDateString("en-US", {
+                    month: "full"
+                })))).forEach(month => { %>
+                    <li>
+                        <h2><%= month %></h2>
+                        <ol>
+                            <% events.filter(event => new Date(event.startDate.seconds * 1000).toLocaleDateString("en-US", {
+                                    month: "full"
+                                } === month)).forEach(event => { %>
+                                <li>
+                                    <article>
+                                        <h3><a href="<%= event.website %>"><%= event.name %></a></h3>
+                                        <p>
+                                            <span>
+                                                <% 
+                                                    const start = new Date(event.startDate.seconds * 1000);
+                                                    const end = new Date(event.endDate.seconds * 1000);
+                                                %>
+                                                <time datetime="<%= start.toISOString() %>"><%= start.toLocaleDateString("en-US", {
+                                                    month: "short",
+                                                    day: "numeric"
+                                                }) %></time>
+
+                                                <% if (event.endDate != event.startDate) { %>
+                                                    <span> through </span>
+                                                    <time datetime="<%= end.toISOString() %>"><%= end.toLocaleDateString("en-US", {
+                                                        month: "short",
+                                                        day: "numeric"
+                                                    }) %></time>
+                                                <% } %>
+                                                
+                                            </span>
+                                            <br>
+                                            <a href="<%= event.mapsLink %>"><%= event.venueName %> | <%= event.city %>, <%= event.state %></a>
+
+                                            <br>
+                                            <span><%= event.description %> </span>
+                                        </p>
+                                        <button type="button" class="btn btn-primary">Add to Calendar</button>
+                                        <button type="button" data-url="https://fang-farm.web.app/events/<%= event.id %>" class="btn btn-secondary icon">share</button>
+                                        <script type="application/ld+json"><%- event.schema %> </script>
+                                    </article>
+                                </li>
+                            <% }); %>
+                        </ol>
+                    </li>
+                <% }); %>
+            </ol>
+        </main>
+        <%- include("modules/global-footer")  %> 
+    </body>
+</html>
+

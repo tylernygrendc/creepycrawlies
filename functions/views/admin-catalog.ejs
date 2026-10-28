@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow, noarchive" />
+        <title>The Fang Farm</title>
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link
+            rel="icon"
+            href="/favicon-32x32.png"
+            type="image/png"
+            sizes="32x32"
+        />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+        <link rel="manifest" href="/manifest.json" />
+        <!-- styles -->
+        <link rel="stylesheet" href="styles/admin-catalog.css">
+    </head>
+    <body>
+
+        <%- include("./modules/admin-nav.ejs") %> 
+
+        <header>
+            <h1>Manage Catalog</h1>
+            <span>
+                <a href="https://app.squareup.com/dashboard/items/library" class="btn btn-secondary">Open in Square</a>
+                <button id="button-sync-with-square-items" class="btn btn-primary">Sync with Square</button>
+            </span>
+        </header>
+
+        <main>
+            <ul id="list-catalog-items">
+                <% items.forEach((item) => { %>
+                    <li
+                        data-id="<%= item.id %>"
+                        data-name="<%= item.name %>"
+                        data-pickup-only="<%= item.pickupOnly %>"
+                        data-in-store-only="<%= item.inStoreOnly %>"
+                        >
+                            <label>
+                                <div>Item</div>
+                                <input type="text" name="name" value="<%= item.name %>" class="form-control summary-item">
+                            </label>
+                            <label>
+                                <div>Pickup Only</div>
+                                <input type="checkbox" name="pickupOnly" value="true" class="summary-item" <%= item.pickupOnly ? "checked" : "" %>>
+                            </label>
+                            <label>
+                                <div>In-Store Only</div>
+                                <input type="checkbox" name="inStoreOnly" value="true" class="summary-item" <%= item.inStoreOnly ? "checked" : "" %>>
+                            </label>
+                            <button class="btn btn-primary button-update-item">Update Item</button>
+                        <table>
+                            <caption>Item Variations for "<%= item?.name %>" (<%= item?.variations?.length || 0 %>)</caption>
+                            <thead>
+                                <tr>
+                                    <th id="<%= item.id + "variation" %>">Variation</th>
+                                    <th id="<%= item.id + "price" %>">Price</th>
+                                    <th id="<%= item.id + "quantity" %>">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% (item.variations || []).forEach((v) => { %>
+                                    <% const variation = v.itemVariationData || {}; %>
+                                    <% const variationId = v.id || variation.id || ""; %>
+                                    <% const variationQuantity = (v.quantity !== undefined ? v.quantity : variation.quantity) ?? 0; %>
+                                    <% const variationPrice = variation.priceMoney?.amount ?? 0; %>
+                                    <tr 
+                                        data-id="<%= variationId %>"
+                                        data-name="<%= variation.name || '' %>"
+                                        data-price="<%= variationPrice %>"
+                                        data-quantity="<%= variationQuantity %>"
+                                        >
+                                        <td>
+                                            <input 
+                                                type="text" 
+                                                name="name" 
+                                                value="<%= variation.name || '' %>" 
+                                                class="form-control td-variation"
+                                                aria-labelledby="<%= item.id + "variation" %>">
+                                        </td>
+                                        <td>
+                                            <input 
+                                                type="number" 
+                                                name="price" 
+                                                step="0.01"
+                                                value="<%= variationPrice %>" 
+                                                class="form-control td-variation"
+                                                aria-labelledby="<%= item.id + "price" %>">
+                                        </td>
+                                        <td>
+                                            <input 
+                                                type="number" 
+                                                name="quantity" 
+                                                value="<%= variationQuantity %>" 
+                                                class="form-control td-variation"
+                                                aria-labelledby="<%= item.id + "quantity" %>">
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </li>
+                <% }); %>
+            </ul>
+        </main>
+        <script id="catalog-json" type="application/json">
+            <%- JSON.stringify(items) %>
+        </script>
+        <script src="/scripts/admin-catalog.min.js"></script>
+    </body>
+</html>

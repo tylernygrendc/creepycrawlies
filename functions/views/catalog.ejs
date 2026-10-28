@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>The Fang Farm</title>
+        <meta name="description" content="Shop all inverts and plants from The Fang Farm." />
+        <!-- open graph card -->
+        <meta property="og:title" content="The Fang Farm Catalog" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="thefangfarm.com/catalog" />
+        <!-- TODO <meta property="og:image" content="" /> -->
+        <meta property="og:description" content="Shop all inverts and plants from The Fang Farm." />
+        <meta property="og:site_name" content="thefangfarm.com" />
+        <!-- styles -->
+        <link rel="stylesheet" href="../../styles/catalog.css">
+    </head>
+    <body>
+        <%- include("modules/global-nav")  %>
+        <%- include("modules/global-header")  %> 
+        <main>
+            <header>
+                <h1 class="metal display"><%= categoryName || "All Items" %> </h1>
+                <form id="catalog-filter-form">
+                    <label>
+                        <span>Search</span>
+                        <input id="catalog-fuse-search" class="form-control" type="search" name="search">
+                    </label>
+                    <details>
+                        <summary>Filter</summary>
+                        <fieldset>
+                            <legend>Category</legend>
+                            <%  [...new Set(items.flatMap(item => item.categories))].forEach(category => { %>
+                                <% if (category != categoryName) { %>
+                                    <label>
+                                        <input type="checkbox" name="category" value="<%= category %>">
+                                        <span><%= category %></span>
+                                    </label>
+                                <% } %>
+                            <% }) %>
+                        </fieldset>
+                    </details>
+                </form>
+            </header>
+            <ol id="catalog-list">
+                <% items.forEach((item) => { %>
+                    <li id=<%= item.id %>  class="catalog-item">
+                        <p>
+                            <span class="item-name"><%= item.name %></span>
+                            <data class="item-price" value="<%= item.variations[0].itemVariationData.priceMoney.amount %> "><%= item.variations[0].itemVariationData.priceMoney.amount %></data>
+                        </p>
+                        <a href="/catalog/item/<%= item.id %>" class="btn btn-secondary">Buying Options</a>
+                        <img src="<%= item.primaryImage.url %>" alt="<%= item.name %>" load="lazy">
+                    </li>
+                <% }); %>
+            </ol>
+        </main>
+        <%- include("modules/global-footer")  %> 
+        <script id="catalog-json" type="application/json">
+            <%- JSON.stringify(items) %>
+        </script>
+        <!-- scripts -->
+        <script src="/scripts/catalog.min.js"></script>
+    </body>
+</html>

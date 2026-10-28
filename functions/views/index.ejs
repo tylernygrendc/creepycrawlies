@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>The Fang Farm</title>
+        <meta
+            name="description"
+            content="Shop all inverts and plants from The Fang Farm."
+        />
+        <!-- open graph card -->
+        <meta property="og:title" content="The Fang Farm Catalog" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="thefangfarm.com/catalog" />
+        <!-- TODO <meta property="og:image" content="" /> -->
+        <meta
+            property="og:description"
+            content="Shop all inverts and plants from The Fang Farm."
+        />
+        <meta property="og:site_name" content="thefangfarm.com" />
+        <!-- styles -->
+        <link rel="stylesheet" href="styles/home.css">
+    </head>
+    <body>
+        <%- include("modules/global-nav") %> <%-
+        include("modules/global-header") %>
+        <main>
+            <header id="hero">
+                <p class="display metal">The Fang Farm</p>
+                <h1 class="title">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+                <nav id="nav-call-to-action">
+                    <ul>
+                        <li><a class="btn btn-accent" href="">Shop</a></li>
+                        <li><a class="btn btn-text" href="">About Us</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <section aria-labelledby="heading-featured-items">
+                <h2 id="heading-featured-items" class="title">Featured</h2>
+                <ul id="list-featured-items">
+                    <% featuredItems.forEach(item => { %>
+                        <li>
+                            <p><%= item.name %></p>
+                            <a href="/catalog/item/<%= item.id %>" class="btn btn-secondary">Buying Options</a>
+                            <img src="<%= item.primaryImage.url %>" alt="<%= item.name %>" load="lazy">
+                        </li>
+                    <% }); %> 
+                </ul>
+            </section>
+            <section aria-labelledby="heading-recent-items" hidden>
+                <h2 id="heading-recent-items">Recent Items</h2>
+            </section>
+        </main>
+    </body>
+</html>

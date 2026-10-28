@@ -1,0 +1,22 @@
+{
+    "type": "module",
+    "scripts": {
+        "build": "node esbuild.config.js && sass public/styles:public/styles",
+        "watch:js": "node esbuild.dev.config.js",
+        "watch:css": "sass --watch public/styles:public/styles",
+        "dev": "concurrently \"npm run watch:js\" \"npm run watch:css\" \"firebase serve\""
+    },
+    "dependencies": {
+        "dompurify": "^3.4.16",
+        "fuse.js": "^7.5.0",
+        "jsdom": "^30.1.2"
+    },
+    "devDependencies": {
+        "chalk": "^6.0.1",
+        "concurrently": "^10.0.5",
+        "esbuild": "^0.28.2",
+        "glob": "^13.0.6",
+        "sass": "^1.102.0",
+        "ttf2woff2": "^8.0.1"
+    }
+}

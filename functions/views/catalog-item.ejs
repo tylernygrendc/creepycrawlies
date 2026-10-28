@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>The Fang Farm</title>
+        <meta
+            name="description"
+            content="View <%= item.name %> at The Fang Farm."
+        />
+        <!-- open graph card -->
+        <meta property="og:title" content="<%= item.name %>" />
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:url"
+            content="thefangfarm.com/catalog/item/<%= item.id %>"
+        />
+        <meta property="og:image" content="<%= item.primaryImage.url %>" />
+        <meta
+            property="og:description"
+            content="View <%= item.name %> at The Fang Farm."
+        />
+        <meta property="og:site_name" content="thefangfarm.com" />
+        <!-- styles -->
+        <link rel="stylesheet" href="../../styles/catalog-item.css">
+    </head>
+    <body>
+        <%- include("modules/global-nav") %> <%-
+        include("modules/global-header") %>
+        <main>
+            <h1 class="metal display"><%= item.name %></h1>
+            <div id="component-gallery">
+                <% item.images.forEach(image => { %>
+                    <img src="<%= image.url %>" alt="<%= image.caption %>">
+                <% }) %>
+            </div>
+            <form id="form-add-to-cart">
+                <input type="hidden" name="id" value="<%= item.id %>">
+                <input type="hidden" name="name" value="<%= item.name %>">
+                <label>
+                    <div>Options</div>
+                    <select id="select-variation" name="variationId" class="form-control">
+                        <% item.variations.forEach(variation => { %>
+                            <% if (variation.quantity != "0") { %>
+                                <option 
+                                    value="<%= variation.id %>"
+                                    data-variation-name="<%= variation.itemVariationData.name %>"
+                                    data-price="<%= Number(variation.itemVariationData.priceMoney.amount).toFixed(2) %>"
+                                >
+                                    <%= variation.itemVariationData.name %> - $<%= Number(variation.itemVariationData.priceMoney.amount).toFixed(2) %>
+                                </option>
+                            <% } %> 
+                        <% }) %>
+                    </select>
+                </label>
+                <input type="hidden" name="variationName" value="<%= item.variations[0].itemVariationData.name %>">
+                <input type="hidden" name="price" value="<%= item.variations[0].itemVariationData.priceMoney.amount %>">
+                <div id="component-quantity">
+                    <label for="input-quantity">Quantity</label>
+                    <button id="decrement-input-quantity" type="button" aria-label="decrement quantity" tabindex="-1" class="btn btn-secondary icon">remove</button>
+                    <input id="input-quantity" type="number" name="quantity" value="1" class="form-control">
+                    <button id="increment-input-quantity" type="button" aria-label="increment quantity" tabindex="-1" class="btn btn-secondary icon">add</button>
+                </div>
+                <button id="button-add-to-cart" type="submit" class="btn btn-accent">Add to Cart</button>
+            </form>
+
+            <% if (item.descriptionHtml) { %>
+                <h2 id="h2-description">Description</h2>
+                <div id="div-description"><%- item.descriptionHtml %></div>
+            <% } else if (item.description){ %>
+                <h2 id="h2-description">Description</h2>
+                <p id="p-description"><%= item.description %></p>
+            <% } %> 
+
+            <% if (relatedItems) { %>
+                <aside>
+                    <h2 id="h2-related-items">Related</h2>
+                    <ul id="related-list" aria-labelledby="h2-related-items">
+                        <% relatedItems.forEach(relatedItem => { %>
+                        <li id=<%= item.id %>  class="catalog-item">
+                            <p>
+                                <span class="item-name"><%= relatedItem.name %></span>
+                                <data class="item-price" value="<%= relatedItem.variations[0].itemVariationData.priceMoney.amount %> "><%= relatedItem.variations[0].itemVariationData.priceMoney.amount %></data>
+                            </p>
+                            <a href="/catalog/item/<%= relatedItem.id %>" class="btn btn-secondary">Buying Options</a>
+                            <img src="<%= relatedItem.primaryImage.url %>" alt="<%= relatedItem.name %>" load="lazy">
+                        </li>
+                    <% }) %>
+                    </ul>
+                </aside>
+            <% } %>
+        </main>
+        <%- include("modules/global-footer") %>
+        <script src="/scripts/catalogItem.min.js"></script>
+    </body>
+</html>

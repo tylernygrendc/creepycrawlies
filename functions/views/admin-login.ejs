@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow, noarchive" />
+        <title>The Fang Farm</title>
+    </head>
+    <body>
+        <form id="login-form">
+            <h1>Login</h1>
+            <label>
+                <span>Email</span>
+                <input
+                    id="email"
+                    class="form-control"
+                    type="email"
+                    name="email"
+                    autocomplete="email"
+                    required
+                />
+            </label>
+            <label>
+                <span>Password</span>
+                <input
+                    id="password"
+                    class="form-control"
+                    type="password"
+                    name="password"
+                    autocomplete="password"
+                    required
+                />
+            </label>
+            <button type="submit" class="btn btn-primary">Login</button>
+            <p id="error-message" style="color: red; display: none"></p>
+        </form>
+
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+            import {
+                getAuth,
+                signInWithEmailAndPassword,
+            } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyDPiJFpOdHFC0HNVPW4bJKPI-_FjCg87Cs",
+                authDomain: "thepodpro.firebaseapp.com",
+                projectId: "thepodpro",
+                storageBucket: "thepodpro.firebasestorage.app",
+                messagingSenderId: "650659331310",
+                appId: "1:650659331310:web:6384e0eca7d902f042c7ff",
+            };
+
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+
+            document
+                .getElementById("login-form")
+                .addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    const email = document.getElementById("email").value;
+                    const password = document.getElementById("password").value;
+                    const errorMsg = document.getElementById("error-message");
+                    errorMsg.style.display = "none";
+
+                    try {
+                        const userCredential = await signInWithEmailAndPassword(
+                            auth,
+                            email,
+                            password,
+                        );
+                        const idToken = await userCredential.user.getIdToken();
+
+                        const response = await fetch("/admin/sessionLogin", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({ idToken }),
+                        });
+
+                        if (response.ok) {
+                            window.location.assign("/admin/dashboard");
+                        } else {
+                            const data = await response.json();
+                            throw new Error(
+                                data.error || "Failed to establish session.",
+                            );
+                        }
+                    } catch (error) {
+                        console.error("Login failed:", error);
+                        errorMsg.textContent = error.message;
+                        errorMsg.style.display = "block";
+                    }
+                });
+        </script>
+    </body>
+</html>
