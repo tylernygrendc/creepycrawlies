@@ -556,4 +556,363 @@ select.form-control option {
   border-color: var(--border-color);
 }
 
+/* Base Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+caption {
+  margin: 16px auto 8px 4px;
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+/* Header Cells */
+th {
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Data Cells */
+td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+  transition: background-color 0.15s ease;
+}
+
+/* Zebra Striping & Hover */
+tbody tr:nth-child(even) {
+  background-color: rgba(36, 45, 31, 0.25);
+}
+
+tbody tr:hover {
+  background-color: var(--bg-elevated);
+}
+
+/* Remove Bottom Border on Last Row */
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Fixed Toast Container */
+#toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 380px;
+  width: calc(100vw - 3rem);
+  pointer-events: none; /* Allows clicking through empty container space */
+}
+
+/* Individual Toast Notification */
+#toast .toast-item {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.875rem 1rem;
+  background-color: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--color-olive);
+  border-radius: 8px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 4px 10px -2px var(--color-olive-glow);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  animation: toast-slide-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Toast Message Body */
+#toast .toast-item > span {
+  flex: 1;
+  word-break: break-word;
+}
+
+/* Close Button */
+#toast .toast-item > button {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: lowercase;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  margin: -0.25rem -0.5rem -0.25rem 0;
+  border-radius: 4px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+#toast .toast-item > button:hover {
+  color: var(--color-pink);
+  background-color: rgba(244, 114, 182, 0.1);
+}
+
+#toast .toast-item > button:focus-visible {
+  outline: 2px solid var(--color-pink);
+  outline-offset: 1px;
+}
+
+/* Accent/Alert Variant */
+#toast .toast-item.toast-accent {
+  border-left-color: var(--color-pink);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 4px 10px -2px rgba(244, 114, 182, 0.15);
+}
+
+/* Entrance Animation */
+@keyframes toast-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.badge-container {
+  position: relative;
+}
+
+[data-badge]::after {
+  content: attr(data-badge);
+  position: absolute;
+  inset: 0 0 auto auto;
+  transform: translate(25%, -25%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  /* Layout & Typography */
+  min-width: 24px;
+  height: 24px;
+  padding: 0;
+  font-family: "Cabin" !important;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  border-radius: 9999px;
+  background-color: var(--color-olive);
+  color: var(--bg-primary);
+  box-shadow: 0 0 8px var(--color-olive-glow);
+  animation: badge-pop 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* handle empty string data-badge="" */
+[data-badge=""]::after {
+  min-width: 8px;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  background-color: var(--color-pink);
+  border: 2px solid var(--bg-secondary);
+  box-shadow: 0 0 6px rgba(244, 114, 182, 0.4);
+}
+
+@keyframes badge-pop {
+  from {
+    opacity: 0;
+    transform: translate(25%, -25%) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: translate(25%, -25%) scale(1);
+  }
+}
+#button-toggle-primary-navigation {
+  z-index: 48;
+  position: fixed;
+  inset: auto auto 8px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  box-sizing: border-box;
+  background-color: var(--color-olive);
+  color: var(--bg-primary);
+  border: 1px solid var(--color-olive);
+  box-shadow: 0 4px 12px var(--color-olive-glow);
+  transition: translate 0.2s ease;
+}
+#button-toggle-primary-navigation[aria-expanded=true] {
+  translate: 280px;
+}
+#button-toggle-primary-navigation[aria-expanded=false] {
+  translate: 0px;
+}
+
+#button-toggle-primary-navigation:hover {
+  background-color: var(--color-olive-dark);
+  border-color: var(--color-olive-dark);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(140, 169, 107, 0.25);
+}
+
+#button-toggle-primary-navigation:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px var(--color-olive-glow);
+}
+
+#nav-primary-navigation {
+  z-index: 24;
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 280px;
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  padding: 0.75rem 0.5rem;
+  box-sizing: border-box;
+  transition: translate 0.2s ease;
+}
+#nav-primary-navigation[data-expanded=false] {
+  translate: -280px;
+}
+#nav-primary-navigation[data-expanded=true] {
+  translate: 0px;
+}
+
+#nav-primary-navigation > a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 1.75rem;
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+#nav-primary-navigation > a:hover {
+  color: var(--text-primary);
+}
+
+#nav-primary-navigation li > a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border-radius: 24px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#nav-primary-navigation li > a:hover {
+  background-color: var(--bg-elevated);
+  color: var(--text-primary);
+}
+
+#nav-primary-navigation li > a:focus-visible {
+  outline: 2px solid var(--color-pink);
+  outline-offset: -2px;
+}
+
+#nav-primary-navigation li > a.active {
+  background-color: var(--color-olive-glow);
+  color: var(--color-olive);
+  font-weight: 600;
+}
+
+#nav-primary-navigation li > a.active-accent {
+  background: linear-gradient(90deg, rgba(244, 114, 182, 0.15), rgba(217, 70, 239, 0.15));
+  color: var(--color-pink);
+  font-weight: 600;
+}
+
+#list-utilities {
+  z-index: 12;
+  position: fixed;
+  inset: 0 0 auto auto;
+  display: flex;
+  align-items: stretch;
+  padding: 8px;
+  gap: 8px;
+  background-color: transparent;
+}
+
+#list-utilities li > button {
+  height: 100%;
+}
+
+#cart-dialog {
+  width: 480px;
+  max-width: 98svw;
+  margin: auto auto;
+  padding: 16px;
+  border: 1px solid black;
+  border-radius: 16px;
+  background-color: var(--bg-elevated);
+  color: var(--text-primary);
+}
+#cart-dialog #button-close-cart-dialog {
+  position: absolute;
+  inset: 0.25rem 0.25rem auto auto;
+}
+
+#cart-form {
+  display: grid;
+  gap: 1rem;
+}
+#cart-form fieldset {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  margin: 8px 0;
+  padding: 1.5rem;
+}
+#cart-form label {
+  display: flex;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  border-radius: 24px;
+}
+#cart-form label:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-elevated);
+}
+
+main {
+  padding: 16px;
+}
+
 /*# sourceMappingURL=events.css.map */

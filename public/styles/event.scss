@@ -1,5 +1,10 @@
 @use "_theme";
-@use "_typography";
+@use "_typography" as typography;
 @use "_resets";
 @use "_button";
 @use "_form-control";
+@use "_table";
+@use "_toast";
+@use "_badge";
+@use "_primary-nav";
+@use "_global-header";

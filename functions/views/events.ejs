@@ -16,10 +16,11 @@
         <link rel="stylesheet" href="styles/events.css">
     </head>
     <body>
-        <%- include("modules/global-nav")  %> 
+        <%- include("modules/global-nav") %> 
+        <%- include("modules/global-header") %> 
         <main>
-            <h1>Upcoming Events</h1>
-            <ol>
+            <h1 id="h1-upcoming-events" class="display metal">Events</h1>
+            <ol aria-labelledby="h1-upcoming-events">
                 <% Array.from(new Set(events.map(event => new Date(event.startDate.seconds * 1000).toLocaleDateString("en-US", {
                     month: "full"
                 })))).forEach(month => { %>

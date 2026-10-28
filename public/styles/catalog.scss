@@ -5,9 +5,9 @@
 @use "_form-control";
 @use "_table";
 @use "_toast";
-@use "_badge.scss";
+@use "_badge";
 @use "_primary-nav";
-@use "_global-header.scss";
+@use "_global-header";
 
 main header {
     padding: 16px 10svw 16px 10svw;
