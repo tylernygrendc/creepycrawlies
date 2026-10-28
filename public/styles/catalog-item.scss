@@ -1,0 +1,135 @@
+@use "_theme";
+@use "_typography" as typography;
+@use "_resets";
+@use "_button";
+@use "_form-control";
+@use "_table";
+@use "_toast";
+@use "_badge.scss";
+@use "_primary-nav";
+@use "_global-header.scss";
+
+main {
+    padding: 16px;
+}
+
+#component-gallery {
+    min-height: 200px;
+    max-height: 20svh;
+    display: flex;
+    gap: 8px;
+    margin: 16px 0;
+    overflow-x: scroll;
+
+    img {
+        aspect-ratio: 1/1;
+    }
+}
+
+#form-add-to-cart {
+    display: grid;
+    gap: 8px;
+    max-width: 320px;
+}
+
+#component-quantity {
+    display: grid;
+    grid-template:
+        "label label label" min-content
+        "decrease input increase" max-content
+        / min-content max-content min-content;
+    gap: 8px;
+
+    label {
+        grid-area: label;
+        @include typography.label-large;
+    }
+    #decrement-input-quantity {
+        grid-area: decrease;
+    }
+    #increment-input-quantity {
+        grid-area: increase;
+    }
+    #input-quantity {
+        grid-area: input;
+    }
+}
+
+#h2-description {
+    margin: 16px 0;
+    @include typography.title-large;
+}
+
+#p-description {
+    max-width: 520px;
+    margin: 16px 0;
+    line-height: 1.5;
+    @include typography.body;
+}
+
+#div-description {
+    max-width: 520px;
+    margin: 16px 0;
+    @include typography.body;
+}
+
+.catalog-item {
+    width: max-content;
+    min-height: 320px;
+    display: grid;
+    grid-template:
+        "img" min-content
+        "p" max-content
+        "a" 1fr
+        / 1fr;
+
+    img {
+        grid-area: img;
+        aspect-ratio: 1 / 1;
+        border: 1px solid var(--border-color);
+    }
+
+    p {
+        grid-area: p;
+        display: grid;
+        padding: 8px 0;
+        gap: 4px;
+        .item-name {
+            @include typography.body-large;
+        }
+        .item-price {
+            @include typography.title-large;
+            &::before {
+                content: "From $ ";
+                @include typography.body-small;
+            }
+            &::after {
+                content: "  USD";
+                font-size: 0.5rem;
+            }
+        }
+    }
+
+    a {
+        grid-area: a;
+        white-space: nowrap;
+        margin-top: auto;
+    }
+}
+
+#h2-related-items {
+    @include typography.title-large;
+}
+
+aside {
+    height: auto;
+}
+
+#related-list {
+    height: min-content;
+    width: 100vw;
+    display: flex;
+    margin: 16px 0;
+    gap: 16px;
+    overflow-x: auto;
+}

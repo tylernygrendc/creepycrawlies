@@ -1,0 +1,54 @@
+:root {
+    /* Backgrounds */
+    --bg-primary: #12160f;
+    --bg-secondary: #1b2217;
+    --bg-elevated: #242d1f;
+
+    /* Text */
+    --text-primary: #f1f5f1;
+    --text-secondary: #9da896;
+
+    /* Olive Accents */
+    --color-olive: #8ca96b;
+    --color-olive-dark: #657e4c;
+    --color-olive-glow: rgba(140, 169, 107, 0.15);
+
+    /* Vibrant Pink / Purple Highlights */
+    --color-pink: #f472b6;
+    --color-magenta: #d946ef;
+
+    /* UI Feedback */
+    --border-color: rgba(140, 169, 107, 0.12);
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+input[type="checkbox"] {
+    accent-color: var(--color-pink);
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+input[type="radio"] {
+    accent-color: var(--color-pink);
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+fieldset:has(input[type="radio"]:checked) label:has(input:not(:checked)) > * {
+    opacity: 0.6;
+}
+
+input[type="range"] {
+    accent-color: var(--color-pink);
+    width: 200px;
+}
+
+progress {
+    accent-color: var(--color-pink);
+    width: 200px;
+    height: 12px;
+}

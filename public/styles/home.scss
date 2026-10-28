@@ -1,0 +1,40 @@
+@use "_theme";
+@use "_typography";
+@use "_resets";
+@use "_button";
+@use "_form-control";
+@use "_table";
+@use "_toast";
+@use "_badge.scss";
+@use "_primary-nav";
+@use "_global-header.scss";
+
+#hero {
+    height: 40svh;
+    display: grid;
+    grid-template-rows: min-content min-content 1fr;
+    justify-items: center;
+    padding: 96px 10svw 16px 10svw;
+    gap: 0.5rem;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)) center/cover
+            no-repeat,
+        url("../images/spider/large.webp") center / cover no-repeat;
+
+    p,
+    h1,
+    nav {
+        align-content: center;
+        text-align: center;
+    }
+}
+
+#hero nav ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+main > section {
+    padding: 1rem;
+}

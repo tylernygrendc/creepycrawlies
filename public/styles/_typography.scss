@@ -1,0 +1,340 @@
+//* Metal Mania
+
+@font-face {
+    font-family: "Metal Mania";
+    src: url("../fonts/MetalMania-Regular.woff2") format("woff2");
+    font-weight: 400; // must match symbols.config.js
+    font-style: normal;
+    font-display: swap;
+}
+
+/* 2. Android Fallback (Roboto) */
+@font-face {
+    font-family: "Metal Mania Fallback Android";
+    src: local("Roboto"), local("Roboto-Regular");
+    size-adjust: 117.2%;
+    ascent-override: 93.8%;
+    descent-override: 29.4%;
+    line-gap-override: 0%;
+}
+
+/* 3. Windows & Apple Fallback (Arial) */
+@font-face {
+    font-family: "Metal Mania Fallback Arial";
+    src: local("Arial"), local("ArialMT");
+    size-adjust: 116.76%;
+    ascent-override: 94.24%;
+    descent-override: 29.59%;
+    line-gap-override: 0%;
+}
+
+.metal {
+    font-family:
+        "Metal Mania", "Metal Mania Fallback Android",
+        "Metal Mania Fallback Arial", serif;
+}
+
+//* Material Symbols declaration
+
+@font-face {
+    font-family: "Material Symbols";
+    src: url("../fonts/material-symbols.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 100 700;
+    font-display: block;
+}
+
+.icon {
+    font-family: "Material Symbols" !important;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px !important;
+    line-height: 1;
+    display: inline-block;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "liga";
+}
+
+//* Cabin declaration and falbacks
+
+@font-face {
+    font-family: "Cabin";
+    src: url("../fonts/Cabin-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Cabin";
+    src: url("../fonts/Cabin-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Cabin";
+    src: url("../fonts/Cabin-Italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* 1. Windows Fallback */
+@font-face {
+    font-family: "Cabin Fallback Arial";
+    src: local("Arial");
+    size-adjust: 94.49%;
+    ascent-override: 102.13%;
+    descent-override: 26.46%;
+    line-gap-override: 0%;
+}
+
+/* 2. macOS Fallback */
+@font-face {
+    font-family: "Cabin Fallback Helvetica";
+    src: local("Helvetica");
+    size-adjust: 98.41%;
+    ascent-override: 98.06%;
+    descent-override: 25.4%;
+    line-gap-override: 0%;
+}
+
+/* 3. iOS Fallback (San Francisco) */
+@font-face {
+    font-family: "Cabin Fallback iOS";
+    src: local("-apple-system"), local("BlinkMacSystemFont");
+    size-adjust: 98.11%;
+    ascent-override: 97.85%;
+    descent-override: 25.48%;
+    line-gap-override: 0%;
+}
+
+/* 4. Android Fallback (Roboto) */
+@font-face {
+    font-family: "Cabin Fallback Android";
+    src: local("Roboto"), local("Roboto-Regular");
+    size-adjust: 94.88%;
+    ascent-override: 101.71%;
+    descent-override: 26.35%;
+    line-gap-override: 0%;
+}
+
+/* 5. Linux Fallback */
+@font-face {
+    font-family: "Cabin Fallback Linux";
+    src: local("Liberation Sans");
+    size-adjust: 95.34%;
+    ascent-override: 101.22%;
+    descent-override: 26.22%;
+    line-gap-override: 0%;
+}
+
+body,
+.cabin {
+    font-family:
+        "Cabin", "Cabin Fallback iOS", "Cabin Fallback Android",
+        "Cabin Fallback Arial", "Cabin Fallback Helvetica",
+        "Cabin Fallback Linux", system-ui, sans-serif;
+}
+
+@mixin display-large {
+    font-size: 3.5625rem;
+    line-height: 4rem;
+    font-weight: 400;
+    letter-spacing: -0.25px;
+}
+
+@mixin display-medium {
+    font-size: 2.8125rem;
+    line-height: 3.25rem;
+    font-weight: 400;
+    letter-spacing: 0px;
+}
+
+@mixin display {
+    @include display-medium;
+}
+
+@mixin display-small {
+    font-size: 2.25rem;
+    line-height: 2.75rem;
+    font-weight: 400;
+    letter-spacing: 0px;
+}
+
+@mixin headline-large {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    font-weight: 400;
+    letter-spacing: 0px;
+}
+
+@mixin headline-medium {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+    font-weight: 400;
+    letter-spacing: 0px;
+}
+
+@mixin headline {
+    @include headline-medium;
+}
+
+@mixin headline-small {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 400;
+    letter-spacing: 0px;
+}
+
+@mixin title-large {
+    font-size: 1.375rem;
+    line-height: 1.75rem;
+    font-weight: 400;
+    letter-spacing: 0px;
+}
+
+@mixin title-medium {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.15px;
+}
+
+@mixin title {
+    @include title-medium;
+}
+
+@mixin title-small {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+}
+
+@mixin body-large {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+@mixin body-medium {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.25px;
+}
+
+@mixin body {
+    @include body-medium;
+}
+
+@mixin body-small {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.4px;
+}
+
+@mixin label-large {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+}
+
+@mixin label-medium {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+@mixin label {
+    @include label-medium;
+}
+
+@mixin label-small {
+    font-size: 0.6875rem;
+    line-height: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.display-large {
+    @include display-large;
+}
+.display-medium,
+.display {
+    @include display-medium;
+}
+.display-small {
+    @include display-small;
+}
+
+.headline-large {
+    @include headline-large;
+}
+.headline-medium,
+.headline {
+    @include headline-medium;
+}
+.headline-small {
+    @include headline-small;
+}
+
+.title-large {
+    @include title-large;
+}
+.title-medium,
+.title {
+    @include title-medium;
+}
+.title-small {
+    @include title-small;
+}
+
+.body-large {
+    @include body-large;
+}
+.body-medium,
+.body {
+    @include body-medium;
+}
+.body-small {
+    @include body-small;
+}
+
+.label-large {
+    @include label-large;
+}
+.label-medium,
+.label {
+    @include label-medium;
+}
+.label-small {
+    @include label-small;
+}
+
+.left {
+    text-align: left;
+}
+.center {
+    text-align: center;
+}
+.right {
+    text-align: right;
+}
+.justify {
+    text-align: justify;
+}

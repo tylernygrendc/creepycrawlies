@@ -1,0 +1,54 @@
+@use "_typography.scss" as typography;
+
+/* Base Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+caption {
+    margin: 16px auto 8px 4px;
+    text-align: left;
+    @include typography.body-large;
+}
+
+/* Header Cells */
+th {
+    background-color: var(--bg-primary);
+    color: var(--text-secondary);
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Data Cells */
+td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+    transition: background-color 0.15s ease;
+}
+
+/* Zebra Striping & Hover */
+tbody tr:nth-child(even) {
+    background-color: rgba(36, 45, 31, 0.25);
+}
+
+tbody tr:hover {
+    background-color: var(--bg-elevated);
+}
+
+/* Remove Bottom Border on Last Row */
+tbody tr:last-child td {
+    border-bottom: none;
+}

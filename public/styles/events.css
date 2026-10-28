@@ -1,0 +1,559 @@
+:root {
+  /* Backgrounds */
+  --bg-primary: #12160f;
+  --bg-secondary: #1b2217;
+  --bg-elevated: #242d1f;
+  /* Text */
+  --text-primary: #f1f5f1;
+  --text-secondary: #9da896;
+  /* Olive Accents */
+  --color-olive: #8ca96b;
+  --color-olive-dark: #657e4c;
+  --color-olive-glow: rgba(140, 169, 107, 0.15);
+  /* Vibrant Pink / Purple Highlights */
+  --color-pink: #f472b6;
+  --color-magenta: #d946ef;
+  /* UI Feedback */
+  --border-color: rgba(140, 169, 107, 0.12);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+input[type=checkbox] {
+  accent-color: var(--color-pink);
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+input[type=radio] {
+  accent-color: var(--color-pink);
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+fieldset:has(input[type=radio]:checked) label:has(input:not(:checked)) > * {
+  opacity: 0.6;
+}
+
+input[type=range] {
+  accent-color: var(--color-pink);
+  width: 200px;
+}
+
+progress {
+  accent-color: var(--color-pink);
+  width: 200px;
+  height: 12px;
+}
+
+@font-face {
+  font-family: "Metal Mania";
+  src: url("../fonts/MetalMania-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+/* 2. Android Fallback (Roboto) */
+@font-face {
+  font-family: "Metal Mania Fallback Android";
+  src: local("Roboto"), local("Roboto-Regular");
+  size-adjust: 117.2%;
+  ascent-override: 93.8%;
+  descent-override: 29.4%;
+  line-gap-override: 0%;
+}
+/* 3. Windows & Apple Fallback (Arial) */
+@font-face {
+  font-family: "Metal Mania Fallback Arial";
+  src: local("Arial"), local("ArialMT");
+  size-adjust: 116.76%;
+  ascent-override: 94.24%;
+  descent-override: 29.59%;
+  line-gap-override: 0%;
+}
+.metal {
+  font-family: "Metal Mania", "Metal Mania Fallback Android", "Metal Mania Fallback Arial", serif;
+}
+
+@font-face {
+  font-family: "Material Symbols";
+  src: url("../fonts/material-symbols.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: block;
+}
+.icon {
+  font-family: "Material Symbols" !important;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px !important;
+  line-height: 1;
+  display: inline-block;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "liga";
+}
+
+@font-face {
+  font-family: "Cabin";
+  src: url("../fonts/Cabin-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cabin";
+  src: url("../fonts/Cabin-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cabin";
+  src: url("../fonts/Cabin-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+/* 1. Windows Fallback */
+@font-face {
+  font-family: "Cabin Fallback Arial";
+  src: local("Arial");
+  size-adjust: 94.49%;
+  ascent-override: 102.13%;
+  descent-override: 26.46%;
+  line-gap-override: 0%;
+}
+/* 2. macOS Fallback */
+@font-face {
+  font-family: "Cabin Fallback Helvetica";
+  src: local("Helvetica");
+  size-adjust: 98.41%;
+  ascent-override: 98.06%;
+  descent-override: 25.4%;
+  line-gap-override: 0%;
+}
+/* 3. iOS Fallback (San Francisco) */
+@font-face {
+  font-family: "Cabin Fallback iOS";
+  src: local("-apple-system"), local("BlinkMacSystemFont");
+  size-adjust: 98.11%;
+  ascent-override: 97.85%;
+  descent-override: 25.48%;
+  line-gap-override: 0%;
+}
+/* 4. Android Fallback (Roboto) */
+@font-face {
+  font-family: "Cabin Fallback Android";
+  src: local("Roboto"), local("Roboto-Regular");
+  size-adjust: 94.88%;
+  ascent-override: 101.71%;
+  descent-override: 26.35%;
+  line-gap-override: 0%;
+}
+/* 5. Linux Fallback */
+@font-face {
+  font-family: "Cabin Fallback Linux";
+  src: local("Liberation Sans");
+  size-adjust: 95.34%;
+  ascent-override: 101.22%;
+  descent-override: 26.22%;
+  line-gap-override: 0%;
+}
+body,
+.cabin {
+  font-family: "Cabin", "Cabin Fallback iOS", "Cabin Fallback Android", "Cabin Fallback Arial", "Cabin Fallback Helvetica", "Cabin Fallback Linux", system-ui, sans-serif;
+}
+
+.display-large {
+  font-size: 3.5625rem;
+  line-height: 4rem;
+  font-weight: 400;
+  letter-spacing: -0.25px;
+}
+
+.display-medium,
+.display {
+  font-size: 2.8125rem;
+  line-height: 3.25rem;
+  font-weight: 400;
+  letter-spacing: 0px;
+}
+
+.display-small {
+  font-size: 2.25rem;
+  line-height: 2.75rem;
+  font-weight: 400;
+  letter-spacing: 0px;
+}
+
+.headline-large {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 0px;
+}
+
+.headline-medium,
+.headline {
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+  font-weight: 400;
+  letter-spacing: 0px;
+}
+
+.headline-small {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 400;
+  letter-spacing: 0px;
+}
+
+.title-large {
+  font-size: 1.375rem;
+  line-height: 1.75rem;
+  font-weight: 400;
+  letter-spacing: 0px;
+}
+
+.title-medium,
+.title {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.15px;
+}
+
+.title-small {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+}
+
+.body-large {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.body-medium,
+.body {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+}
+
+.body-small {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+}
+
+.label-large {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+}
+
+.label-medium,
+.label {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.label-small {
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.justify {
+  text-align: justify;
+}
+
+* {
+  margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+label {
+  display: grid;
+  width: 100%;
+}
+label:has([type=checkbox]), label:has([type=radio]) {
+  display: flex;
+  min-height: 1.5lh;
+}
+label:has([type=checkbox]) span, label:has([type=radio]) span {
+  flex: 1;
+  align-self: stretch;
+  padding: 0 0.25rem;
+}
+
+ul,
+ol,
+dl {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+
+details summary {
+  cursor: pointer;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+  margin-block-end: 0;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/* Base Button Styling */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* Primary Button (Olive Theme) */
+.btn-primary {
+  background-color: var(--color-olive);
+  color: var(--bg-primary);
+  border: 1px solid var(--color-olive);
+  box-shadow: 0 4px 12px var(--color-olive-glow);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-olive-dark);
+  border-color: var(--color-olive-dark);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(140, 169, 107, 0.25);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px var(--color-olive-glow);
+}
+
+/* Accent Button (Vibrant Pink/Magenta Gradient) */
+.btn-accent {
+  background: linear-gradient(135deg, var(--color-pink), var(--color-magenta));
+  color: var(--bg-primary);
+  border: 1px solid transparent;
+  box-shadow: 0 4px 14px rgba(244, 114, 182, 0.25);
+}
+
+.btn-accent:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(217, 70, 239, 0.35);
+}
+
+.btn-accent:active {
+  transform: translateY(0);
+  filter: brightness(0.95);
+}
+
+/* Secondary / Outline Button */
+.btn-secondary {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-elevated);
+  border-color: var(--color-olive);
+  color: var(--color-olive);
+}
+
+.btn-text {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: none;
+}
+
+.btn-text:hover {
+  color: var(--text-primary);
+}
+
+/* Focus and Disabled States */
+.btn:focus-visible {
+  outline: 2px solid var(--color-pink);
+  outline-offset: 2px;
+}
+
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Base Form Controls (Inputs & Textareas) */
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  appearance: none;
+}
+
+/* Hover & Elevated States */
+.form-control:hover {
+  background-color: var(--bg-elevated);
+  border-color: rgba(140, 169, 107, 0.3);
+}
+
+/* Placeholder Styling */
+.form-control::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+/* Interactive Focus State (Olive glow with pink accent hint) */
+.form-control:focus {
+  outline: none;
+  background-color: var(--bg-elevated);
+  border-color: var(--color-olive);
+  box-shadow: 0 0 0 3px var(--color-olive-glow), 0 0 8px rgba(244, 114, 182, 0.15);
+}
+
+label:has(.form-control) div,
+label:has(.form-control) span {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  margin-bottom: 4px;
+}
+
+/* Textarea Specifics */
+textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Custom Select Dropdown Styling */
+select.form-control {
+  cursor: pointer;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238ca96b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+}
+
+select.form-control option {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Validation & Feedback States */
+.form-control.is-invalid {
+  border-color: var(--color-pink);
+  box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.2);
+}
+
+/* Disabled State */
+.form-control:disabled,
+.form-control[readonly] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background-color: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+/*# sourceMappingURL=events.css.map */

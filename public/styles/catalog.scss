@@ -1,0 +1,146 @@
+@use "_theme";
+@use "_typography" as typography;
+@use "_resets";
+@use "_button";
+@use "_form-control";
+@use "_table";
+@use "_toast";
+@use "_badge.scss";
+@use "_primary-nav";
+@use "_global-header.scss";
+
+main header {
+    padding: 16px 10svw 16px 10svw;
+
+    form {
+        margin-top: 16px;
+        max-width: 480px;
+    }
+
+    details {
+        margin-top: 8px;
+        summary {
+            position: relative;
+            list-style: none;
+            width: 100%;
+            @extend .btn;
+            @extend .btn-secondary;
+            &::after {
+                content: "filter_list";
+                font-family: "Material Symbols";
+                margin-left: auto;
+            }
+        }
+        &[open] {
+            summary::after {
+                content: "keyboard_arrow_up";
+            }
+        }
+        &:not(:has(label)) {
+            display: none;
+        }
+
+        fieldset {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            margin: 8px 0 8px 16px;
+            padding: 20px;
+            gap: 8px;
+
+            legend {
+                @include typography.label;
+            }
+            label {
+                display: inline-flex;
+                align-items: center;
+                width: max-content;
+                padding: 8px;
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                @include typography.label-small;
+                cursor: pointer;
+
+                input[type="checkbox"] {
+                    height: 12px;
+                    width: 12px;
+                }
+
+                &:hover {
+                    background-color: var(--bg-elevated);
+                }
+                &:has(:checked) {
+                    border-color: var(--color-pink);
+                    background-color: var(--bg-elevated);
+                }
+            }
+        }
+    }
+}
+
+.catalog-item {
+    display: grid;
+    grid-template:
+        "img" max-content
+        "p" max-content
+        "a" max-content
+        / 1fr;
+
+    img {
+        grid-area: img;
+        aspect-ratio: 1 / 1;
+        border: 1px solid var(--border-color);
+    }
+
+    p {
+        grid-area: p;
+        display: grid;
+        padding: 8px 0;
+        gap: 4px;
+        .item-name {
+            @include typography.body-large;
+        }
+        .item-price {
+            @include typography.title-large;
+            &::before {
+                content: "From $ ";
+                @include typography.body-small;
+            }
+            &::after {
+                content: "  USD";
+                font-size: 0.5rem;
+            }
+        }
+    }
+
+    a {
+        grid-area: a;
+    }
+}
+
+#catalog-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+    margin: 0;
+}
+
+@media (min-width: 600px) {
+    #catalog-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 900px) {
+    #catalog-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    #catalog-list {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

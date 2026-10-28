@@ -1,0 +1,99 @@
+/* Base Button Styling */
+.btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* Primary Button (Olive Theme) */
+.btn-primary {
+    background-color: var(--color-olive);
+    color: var(--bg-primary);
+    border: 1px solid var(--color-olive);
+    box-shadow: 0 4px 12px var(--color-olive-glow);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-olive-dark);
+    border-color: var(--color-olive-dark);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(140, 169, 107, 0.25);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px var(--color-olive-glow);
+}
+
+/* Accent Button (Vibrant Pink/Magenta Gradient) */
+.btn-accent {
+    background: linear-gradient(
+        135deg,
+        var(--color-pink),
+        var(--color-magenta)
+    );
+    color: var(--bg-primary);
+    border: 1px solid transparent;
+    box-shadow: 0 4px 14px rgba(244, 114, 182, 0.25);
+}
+
+.btn-accent:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(217, 70, 239, 0.35);
+}
+
+.btn-accent:active {
+    transform: translateY(0);
+    filter: brightness(0.95);
+}
+
+/* Secondary / Outline Button */
+.btn-secondary {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-elevated);
+    border-color: var(--color-olive);
+    color: var(--color-olive);
+}
+
+.btn-text {
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: none;
+}
+
+.btn-text:hover {
+    color: var(--text-primary);
+}
+
+/* Focus and Disabled States */
+.btn:focus-visible {
+    outline: 2px solid var(--color-pink);
+    outline-offset: 2px;
+}
+
+.btn:disabled,
+.btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}

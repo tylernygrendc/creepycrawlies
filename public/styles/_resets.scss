@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+}
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+html,
+body {
+    height: 100%;
+}
+label {
+    display: grid;
+    width: 100%;
+    &:has([type="checkbox"]),
+    &:has([type="radio"]) {
+        display: flex;
+        min-height: 1.5lh;
+        span {
+            flex: 1;
+            align-self: stretch;
+            padding: 0 0.25rem;
+        }
+    }
+}
+ul,
+ol,
+dl {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.25rem;
+}
+details {
+    summary {
+        cursor: pointer;
+    }
+}
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+    margin-block-end: 0;
+}
+p {
+    text-wrap: pretty;
+}
+#root,
+#__next {
+    isolation: isolate;
+}
