@@ -65,10 +65,7 @@ node_modules/
 .dataconnect
 
 # apple
-.DStore
+.DS_store
 
 # agent
 .agents
-
-# public
-public
