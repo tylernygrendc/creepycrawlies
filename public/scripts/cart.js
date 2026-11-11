@@ -5,6 +5,13 @@ import { toast } from "./toast.mjs";
 const dialog = document.getElementById("cart-dialog");
 const form = document.getElementById("cart-form");
 
+export function updateCartCountBadge() {
+    const cartButton = document.getElementById("button-show-cart");
+    const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+    if (cartButton) cartButton.setAttribute("data-badge", cartItems.length);
+    return cartItems;
+}
+
 const syncStorageFromCart = () => {
     const cartItems = [];
     const tbody = document.getElementById("cart-items");
@@ -13,6 +20,7 @@ const syncStorageFromCart = () => {
     });
     // store the updated cart
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    updateCartCountBadge();
 };
 
 const buildCartFromStorage = () => {
@@ -179,6 +187,7 @@ const embedPickupOptions = async () => {
 };
 
 onload = () => {
+    updateCartCountBadge();
     // set form content to default
     form.innerHTML = html`
         <div id="dynamic-form-content">

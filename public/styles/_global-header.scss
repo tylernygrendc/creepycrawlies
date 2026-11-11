@@ -6,7 +6,7 @@
     inset: 0 0 auto auto;
     display: flex;
     align-items: stretch;
-    padding: 8px;
+    padding: 16px;
     gap: 8px;
     background-color: transparent;
 }
@@ -45,6 +45,7 @@
     label {
         display: flex;
         padding: 0.5rem 1rem 0.5rem 0.5rem;
+        margin: 4px 0;
         border-radius: 24px;
         &:hover {
             color: var(--text-primary);

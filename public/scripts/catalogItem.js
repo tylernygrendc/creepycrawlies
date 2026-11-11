@@ -1,4 +1,6 @@
+import { html } from "./markup.mjs";
 import { toast } from "./toast.mjs";
+import { updateCartCountBadge } from "./cart";
 
 const itemId = location.pathname.split("/")[3];
 
@@ -51,8 +53,8 @@ const buttonAddToCart = document.getElementById("button-add-to-cart");
     const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
     const existingCartEntry = cartItems.find((item) => item.id === itemId);
     if (existingCartEntry) {
-        buttonAddToCart.innerText = "Added to Cart";
-        buttonAddToCart.setAttribute("disabled", "");
+        buttonAddToCart.innerHTML = html`<i class="icon">check</i> Added to Cart`;
+        buttonAddToCart.classList.replace("btn-accent", "btn-text");
         toast("This item is already in your cart.");
     }
 })();
@@ -82,7 +84,8 @@ form.addEventListener("submit", (e) => {
         cartItems.push(data);
     }
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    buttonAddToCart.innerText = "Added to Cart";
-    buttonAddToCart.setAttribute("disabled", "");
+    updateCartCountBadge();
+    buttonAddToCart.innerHTML = html`<i class="icon">check</i> Added to Cart`;
+    buttonAddToCart.classList.replace("btn-accent", "btn-text");
     toast("Item added to cart!");
 });

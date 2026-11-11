@@ -10,6 +10,7 @@ const appearance = {
     },
     symbols = [
         "add",
+        "check",
         "close",
         "delete",
         "edit",

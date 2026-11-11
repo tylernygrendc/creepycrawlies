@@ -467,7 +467,6 @@ h6 {
 .btn:disabled, main header details summary:disabled,
 .btn.disabled,
 main header details summary.disabled {
-  opacity: 0.5;
   cursor: not-allowed;
   transform: none !important;
   box-shadow: none !important;
@@ -613,8 +612,8 @@ tbody tr:last-child td {
 /* Fixed Toast Container */
 #toast {
   position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
+  bottom: 16px;
+  right: 16px;
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -747,7 +746,7 @@ tbody tr:last-child td {
 #button-toggle-primary-navigation {
   z-index: 48;
   position: fixed;
-  inset: auto auto 8px 8px;
+  inset: auto auto 16px 16px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -865,7 +864,7 @@ tbody tr:last-child td {
   inset: 0 0 auto auto;
   display: flex;
   align-items: stretch;
-  padding: 8px;
+  padding: 16px;
   gap: 8px;
   background-color: transparent;
 }
@@ -902,6 +901,7 @@ tbody tr:last-child td {
 #cart-form label {
   display: flex;
   padding: 0.5rem 1rem 0.5rem 0.5rem;
+  margin: 4px 0;
   border-radius: 24px;
 }
 #cart-form label:hover {
@@ -931,6 +931,11 @@ tbody tr:last-child td {
 #pickup-options label input[type=radio] {
   grid-area: radio;
   align-self: center;
+}
+
+#global-footer {
+  min-height: 200px;
+  padding-bottom: 64px;
 }
 
 main header {
