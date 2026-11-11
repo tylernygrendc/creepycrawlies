@@ -8,14 +8,14 @@
     --text-primary: #f1f5f1;
     --text-secondary: #9da896;
 
-    /* Olive Accents */
-    --color-olive: #8ca96b;
-    --color-olive-dark: #657e4c;
-    --color-olive-glow: rgba(140, 169, 107, 0.15);
+    /* Primary Accents */
+    --color-primary: #8ca96b;
+    --color-primary-dark: #657e4c;
+    --color-primary-glow: rgba(140, 169, 107, 0.15);
 
-    /* Vibrant Pink / Purple Highlights */
-    --color-pink: #f472b6;
-    --color-magenta: #d946ef;
+    /* Secondary & Highlight */
+    --color-secondary: #f472b6;
+    --color-secondary-highlight: #d946ef;
 
     /* UI Feedback */
     --border-color: rgba(140, 169, 107, 0.12);
@@ -27,13 +27,13 @@ body {
 }
 
 input[type="checkbox"] {
-    accent-color: var(--color-pink);
+    accent-color: var(--color-secondary);
     width: 1.2rem;
     height: 1.2rem;
 }
 
 input[type="radio"] {
-    accent-color: var(--color-pink);
+    accent-color: var(--color-secondary);
     width: 1.2rem;
     height: 1.2rem;
 }
@@ -43,12 +43,12 @@ fieldset:has(input[type="radio"]:checked) label:has(input:not(:checked)) > * {
 }
 
 input[type="range"] {
-    accent-color: var(--color-pink);
+    accent-color: var(--color-secondary);
     width: 200px;
 }
 
 progress {
-    accent-color: var(--color-pink);
+    accent-color: var(--color-secondary);
     width: 200px;
     height: 12px;
 }

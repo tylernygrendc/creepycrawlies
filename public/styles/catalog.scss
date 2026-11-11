@@ -71,7 +71,7 @@ main header {
                     background-color: var(--bg-elevated);
                 }
                 &:has(:checked) {
-                    border-color: var(--color-pink);
+                    border-color: var(--color-secondary);
                     background-color: var(--bg-elevated);
                 }
             }

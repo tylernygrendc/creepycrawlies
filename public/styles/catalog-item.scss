@@ -10,7 +10,10 @@
 @use "_global-header.scss";
 
 main {
-    padding: 16px;
+    padding: 16px 0 16px 16px;
+    & > header {
+        max-width: 70%;
+    }
 }
 
 #component-gallery {
@@ -127,7 +130,8 @@ aside {
 
 #related-list {
     height: min-content;
-    width: 100vw;
+    width: 100svw;
+    max-width: 100%;
     display: flex;
     margin: 16px 0;
     gap: 16px;

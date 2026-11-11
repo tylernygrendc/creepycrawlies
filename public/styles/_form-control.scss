@@ -35,9 +35,9 @@
 .form-control:focus {
     outline: none;
     background-color: var(--bg-elevated);
-    border-color: var(--color-olive);
+    border-color: var(--color-primary);
     box-shadow:
-        0 0 0 3px var(--color-olive-glow),
+        0 0 0 3px var(--color-primary-glow),
         0 0 8px rgba(244, 114, 182, 0.15);
 }
 
@@ -72,7 +72,7 @@ select.form-control option {
 
 /* Validation & Feedback States */
 .form-control.is-invalid {
-    border-color: var(--color-pink);
+    border-color: var(--color-secondary);
     box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.2);
 }
 

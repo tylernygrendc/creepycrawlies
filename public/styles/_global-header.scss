@@ -49,4 +49,8 @@
             background-color: var(--bg-elevated);
         }
     }
+
+    input[type="number"] {
+        width: 7ch;
+    }
 }

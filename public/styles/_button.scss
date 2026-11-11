@@ -19,15 +19,15 @@
 
 /* Primary Button (Olive Theme) */
 .btn-primary {
-    background-color: var(--color-olive);
+    background-color: var(--color-primary);
     color: var(--bg-primary);
-    border: 1px solid var(--color-olive);
-    box-shadow: 0 4px 12px var(--color-olive-glow);
+    border: 1px solid var(--color-primary);
+    box-shadow: 0 4px 12px var(--color-primary-glow);
 }
 
 .btn-primary:hover {
-    background-color: var(--color-olive-dark);
-    border-color: var(--color-olive-dark);
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
     color: var(--text-primary);
     transform: translateY(-1px);
     box-shadow: 0 6px 16px rgba(140, 169, 107, 0.25);
@@ -35,15 +35,15 @@
 
 .btn-primary:active {
     transform: translateY(0);
-    box-shadow: 0 2px 8px var(--color-olive-glow);
+    box-shadow: 0 2px 8px var(--color-primary-glow);
 }
 
 /* Accent Button (Vibrant Pink/Magenta Gradient) */
 .btn-accent {
     background: linear-gradient(
         135deg,
-        var(--color-pink),
-        var(--color-magenta)
+        var(--color-secondary),
+        var(--color-secondary-highlight)
     );
     color: var(--bg-primary);
     border: 1px solid transparent;
@@ -70,8 +70,8 @@
 
 .btn-secondary:hover {
     background-color: var(--bg-elevated);
-    border-color: var(--color-olive);
-    color: var(--color-olive);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
 }
 
 .btn-text {
@@ -86,7 +86,7 @@
 
 /* Focus and Disabled States */
 .btn:focus-visible {
-    outline: 2px solid var(--color-pink);
+    outline: 2px solid var(--color-secondary);
     outline-offset: 2px;
 }
 

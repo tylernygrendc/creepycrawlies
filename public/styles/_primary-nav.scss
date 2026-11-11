@@ -18,10 +18,10 @@
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     outline: none;
     box-sizing: border-box;
-    background-color: var(--color-olive);
+    background-color: var(--color-primary);
     color: var(--bg-primary);
-    border: 1px solid var(--color-olive);
-    box-shadow: 0 4px 12px var(--color-olive-glow);
+    border: 1px solid var(--color-primary);
+    box-shadow: 0 4px 12px var(--color-primary-glow);
     transition: translate 0.2s ease;
 
     &[aria-expanded="true"] {
@@ -33,8 +33,8 @@
 }
 
 #button-toggle-primary-navigation:hover {
-    background-color: var(--color-olive-dark);
-    border-color: var(--color-olive-dark);
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
     color: var(--text-primary);
     transform: translateY(-1px);
     box-shadow: 0 6px 16px rgba(140, 169, 107, 0.25);
@@ -42,7 +42,7 @@
 
 #button-toggle-primary-navigation:active {
     transform: translateY(0);
-    box-shadow: 0 2px 8px var(--color-olive-glow);
+    box-shadow: 0 2px 8px var(--color-primary-glow);
 }
 
 #nav-primary-navigation {
@@ -101,13 +101,13 @@
 }
 
 #nav-primary-navigation li > a:focus-visible {
-    outline: 2px solid var(--color-pink);
+    outline: 2px solid var(--color-secondary);
     outline-offset: -2px;
 }
 
 #nav-primary-navigation li > a.active {
-    background-color: var(--color-olive-glow);
-    color: var(--color-olive);
+    background-color: var(--color-primary-glow);
+    color: var(--color-primary);
     font-weight: 600;
 }
 
@@ -118,6 +118,6 @@
         rgba(244, 114, 182, 0.15),
         rgba(217, 70, 239, 0.15)
     );
-    color: var(--color-pink);
+    color: var(--color-secondary);
     font-weight: 600;
 }

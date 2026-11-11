@@ -368,9 +368,6 @@ h5,
 h6 {
   overflow-wrap: break-word;
   margin-block-end: 0;
-}
-
-p {
   text-wrap: pretty;
 }
 
@@ -569,7 +566,7 @@ table {
 }
 
 caption {
-  margin: 16px auto 8px 4px;
+  margin: 8px auto 8px 4px;
   text-align: left;
   font-size: 1rem;
   line-height: 1.5rem;
@@ -581,7 +578,7 @@ caption {
 th {
   background-color: var(--bg-primary);
   color: var(--text-secondary);
-  padding: 0.75rem 1rem;
+  padding: 4px 8px;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -592,7 +589,7 @@ th {
 
 /* Data Cells */
 td {
-  padding: 0.75rem 1rem;
+  padding: 4px 8px;
   border-bottom: 1px solid var(--border-color);
   vertical-align: middle;
   transition: background-color 0.15s ease;
@@ -910,9 +907,15 @@ tbody tr:last-child td {
   color: var(--text-primary);
   background-color: var(--bg-elevated);
 }
+#cart-form input[type=number] {
+  width: 7ch;
+}
 
 main {
-  padding: 16px;
+  padding: 16px 0 16px 16px;
+}
+main > header {
+  max-width: 70%;
 }
 
 #component-gallery {
@@ -1041,7 +1044,8 @@ aside {
 
 #related-list {
   height: min-content;
-  width: 100vw;
+  width: 100svw;
+  max-width: 100%;
   display: flex;
   margin: 16px 0;
   gap: 16px;
