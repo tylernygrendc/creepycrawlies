@@ -11,6 +11,7 @@ const appearance = {
     symbols = [
         "add",
         "close",
+        "delete",
         "edit",
         "filter_list",
         "keyboard_arrow_down",
