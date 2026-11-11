@@ -28,7 +28,54 @@
         <%- include("modules/global-nav") %> <%-
         include("modules/global-header") %>
         <main>
-            <h1 class="metal display"><%= item.name %></h1>
+            <header>
+                <% const inStock = item.variations.some(v => Number(v.quantity) > 0) %>
+                <% const shipmentDay = () => {
+                    const today = new Date();
+                    const day = today.getDay();
+                    const nextTuesday = () => {
+                        const daysUntilTuesday = (2 - today.getDay() + 7) % 7 || 7; 
+                        nextTuesday.setDate(today.getDate() + daysUntilTuesday);
+                        
+                        return nextTuesday.toLocaleDateString(undefined, {
+                            weekday: 'long',
+                            month: 'short',
+                            day: 'numeric'
+                        });
+                    };
+                    // we ship by Tuesday each week
+                    // cutoff time 5pm on Sunday
+                    if(day > 2) return "Ships Tuesday";
+                    else if(day === 0) return today.getHours() < 18 
+                        ? "Ships Tuesday"
+                        : `Ships ${nextTuesday()}`;
+                } %>
+                <h1 class="metal headline"><%= item.name %></h1>
+                <% const optionsAvailable = (() => {
+                    const number = item.variations.length || 1;
+                    if(number === 1) {
+                        return "One Option Available";
+                    } else if(number < 10) {
+                        const numberWord = [
+                            "Two",
+                            "Three",
+                            "Four",
+                            "Five",
+                            "Six",
+                            "Seven",
+                            "Eight",
+                            "Nine"
+                        ][number];
+                        return `${numberWord} Options Available`;
+                    } else {
+                        return "10+ Options Available";
+                    }
+                })() %> 
+                <% if (optionsAvailable) { %>
+                    <p class="label-large"><%= optionsAvailable %> | <b><%= item.pickupOnly === "true" ? "Pickup Only" : shipmentDay() %></b></p>
+
+                <% } %>
+            </header>
             <div id="component-gallery">
                 <% item.images.forEach(image => { %>
                     <img src="<%= image.url %>" alt="<%= image.caption %>">
