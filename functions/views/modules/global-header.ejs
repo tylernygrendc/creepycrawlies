@@ -23,6 +23,13 @@
     </ul>
 </header>
 
+<script>
+    const cart = document.getElementById("button-show-cart");
+    const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+    if (cart && cartItems.length)
+        cart.setAttribute("data-badge", cartItems.length);
+</script>
+
 <dialog id="cart-dialog">
     <button
         id="button-close-cart-dialog"
