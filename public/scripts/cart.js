@@ -42,6 +42,7 @@ const buildCartFromStorage = () => {
                         </td>
                         <td>
                             <input
+                                class="form-control"
                                 type="number"
                                 name="quantity"
                                 value="${item.quantity}"
@@ -57,10 +58,10 @@ const buildCartFromStorage = () => {
                         <td>
                             <button
                                 type="button"
-                                class="icon remove-cart-item"
+                                class="btn btn-text icon remove-cart-item"
                                 aria-label="remove item"
                             >
-                                remove
+                                delete
                             </button>
                         </td>
                     </tr>
