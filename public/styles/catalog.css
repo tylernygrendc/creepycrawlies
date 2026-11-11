@@ -6,13 +6,13 @@
   /* Text */
   --text-primary: #f1f5f1;
   --text-secondary: #9da896;
-  /* Olive Accents */
-  --color-olive: #8ca96b;
-  --color-olive-dark: #657e4c;
-  --color-olive-glow: rgba(140, 169, 107, 0.15);
-  /* Vibrant Pink / Purple Highlights */
-  --color-pink: #f472b6;
-  --color-magenta: #d946ef;
+  /* Primary Accents */
+  --color-primary: #8ca96b;
+  --color-primary-dark: #657e4c;
+  --color-primary-glow: rgba(140, 169, 107, 0.15);
+  /* Secondary & Highlight */
+  --color-secondary: #f472b6;
+  --color-secondary-highlight: #d946ef;
   /* UI Feedback */
   --border-color: rgba(140, 169, 107, 0.12);
 }
@@ -23,13 +23,13 @@ body {
 }
 
 input[type=checkbox] {
-  accent-color: var(--color-pink);
+  accent-color: var(--color-secondary);
   width: 1.2rem;
   height: 1.2rem;
 }
 
 input[type=radio] {
-  accent-color: var(--color-pink);
+  accent-color: var(--color-secondary);
   width: 1.2rem;
   height: 1.2rem;
 }
@@ -39,12 +39,12 @@ fieldset:has(input[type=radio]:checked) label:has(input:not(:checked)) > * {
 }
 
 input[type=range] {
-  accent-color: var(--color-pink);
+  accent-color: var(--color-secondary);
   width: 200px;
 }
 
 progress {
-  accent-color: var(--color-pink);
+  accent-color: var(--color-secondary);
   width: 200px;
   height: 12px;
 }
@@ -397,15 +397,15 @@ h6 {
 
 /* Primary Button (Olive Theme) */
 .btn-primary {
-  background-color: var(--color-olive);
+  background-color: var(--color-primary);
   color: var(--bg-primary);
-  border: 1px solid var(--color-olive);
-  box-shadow: 0 4px 12px var(--color-olive-glow);
+  border: 1px solid var(--color-primary);
+  box-shadow: 0 4px 12px var(--color-primary-glow);
 }
 
 .btn-primary:hover {
-  background-color: var(--color-olive-dark);
-  border-color: var(--color-olive-dark);
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
   color: var(--text-primary);
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(140, 169, 107, 0.25);
@@ -413,12 +413,12 @@ h6 {
 
 .btn-primary:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px var(--color-olive-glow);
+  box-shadow: 0 2px 8px var(--color-primary-glow);
 }
 
 /* Accent Button (Vibrant Pink/Magenta Gradient) */
 .btn-accent {
-  background: linear-gradient(135deg, var(--color-pink), var(--color-magenta));
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-highlight));
   color: var(--bg-primary);
   border: 1px solid transparent;
   box-shadow: 0 4px 14px rgba(244, 114, 182, 0.25);
@@ -444,8 +444,8 @@ h6 {
 
 .btn-secondary:hover, main header details summary:hover {
   background-color: var(--bg-elevated);
-  border-color: var(--color-olive);
-  color: var(--color-olive);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .btn-text {
@@ -460,7 +460,7 @@ h6 {
 
 /* Focus and Disabled States */
 .btn:focus-visible, main header details summary:focus-visible {
-  outline: 2px solid var(--color-pink);
+  outline: 2px solid var(--color-secondary);
   outline-offset: 2px;
 }
 
@@ -505,8 +505,8 @@ main header details summary.disabled {
 .form-control:focus {
   outline: none;
   background-color: var(--bg-elevated);
-  border-color: var(--color-olive);
-  box-shadow: 0 0 0 3px var(--color-olive-glow), 0 0 8px rgba(244, 114, 182, 0.15);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-glow), 0 0 8px rgba(244, 114, 182, 0.15);
 }
 
 label:has(.form-control) div,
@@ -541,7 +541,7 @@ select.form-control option {
 
 /* Validation & Feedback States */
 .form-control.is-invalid {
-  border-color: var(--color-pink);
+  border-color: var(--color-secondary);
   box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.2);
 }
 
@@ -635,9 +635,9 @@ tbody tr:last-child td {
   background-color: var(--bg-elevated);
   color: var(--text-primary);
   border: 1px solid var(--border-color);
-  border-left: 4px solid var(--color-olive);
+  border-left: 4px solid var(--color-primary);
   border-radius: 8px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 4px 10px -2px var(--color-olive-glow);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 4px 10px -2px var(--color-primary-glow);
   font-size: 0.9rem;
   line-height: 1.4;
   animation: toast-slide-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -668,18 +668,18 @@ tbody tr:last-child td {
 }
 
 #toast .toast-item > button:hover {
-  color: var(--color-pink);
+  color: var(--color-secondary);
   background-color: rgba(244, 114, 182, 0.1);
 }
 
 #toast .toast-item > button:focus-visible {
-  outline: 2px solid var(--color-pink);
+  outline: 2px solid var(--color-secondary);
   outline-offset: 1px;
 }
 
 /* Accent/Alert Variant */
 #toast .toast-item.toast-accent {
-  border-left-color: var(--color-pink);
+  border-left-color: var(--color-secondary);
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 4px 10px -2px rgba(244, 114, 182, 0.15);
 }
 
@@ -717,9 +717,9 @@ tbody tr:last-child td {
   line-height: 1;
   white-space: nowrap;
   border-radius: 9999px;
-  background-color: var(--color-olive);
+  background-color: var(--color-primary);
   color: var(--bg-primary);
-  box-shadow: 0 0 8px var(--color-olive-glow);
+  box-shadow: 0 0 8px var(--color-primary-glow);
   animation: badge-pop 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -729,7 +729,7 @@ tbody tr:last-child td {
   width: 8px;
   height: 8px;
   padding: 0;
-  background-color: var(--color-pink);
+  background-color: var(--color-secondary);
   border: 2px solid var(--bg-secondary);
   box-shadow: 0 0 6px rgba(244, 114, 182, 0.4);
 }
@@ -764,10 +764,10 @@ tbody tr:last-child td {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
   box-sizing: border-box;
-  background-color: var(--color-olive);
+  background-color: var(--color-primary);
   color: var(--bg-primary);
-  border: 1px solid var(--color-olive);
-  box-shadow: 0 4px 12px var(--color-olive-glow);
+  border: 1px solid var(--color-primary);
+  box-shadow: 0 4px 12px var(--color-primary-glow);
   transition: translate 0.2s ease;
 }
 #button-toggle-primary-navigation[aria-expanded=true] {
@@ -778,8 +778,8 @@ tbody tr:last-child td {
 }
 
 #button-toggle-primary-navigation:hover {
-  background-color: var(--color-olive-dark);
-  border-color: var(--color-olive-dark);
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
   color: var(--text-primary);
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(140, 169, 107, 0.25);
@@ -787,7 +787,7 @@ tbody tr:last-child td {
 
 #button-toggle-primary-navigation:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px var(--color-olive-glow);
+  box-shadow: 0 2px 8px var(--color-primary-glow);
 }
 
 #nav-primary-navigation {
@@ -843,19 +843,19 @@ tbody tr:last-child td {
 }
 
 #nav-primary-navigation li > a:focus-visible {
-  outline: 2px solid var(--color-pink);
+  outline: 2px solid var(--color-secondary);
   outline-offset: -2px;
 }
 
 #nav-primary-navigation li > a.active {
-  background-color: var(--color-olive-glow);
-  color: var(--color-olive);
+  background-color: var(--color-primary-glow);
+  color: var(--color-primary);
   font-weight: 600;
 }
 
 #nav-primary-navigation li > a.active-accent {
   background: linear-gradient(90deg, rgba(244, 114, 182, 0.15), rgba(217, 70, 239, 0.15));
-  color: var(--color-pink);
+  color: var(--color-secondary);
   font-weight: 600;
 }
 
@@ -878,7 +878,7 @@ tbody tr:last-child td {
   width: 480px;
   max-width: 98svw;
   margin: auto auto;
-  padding: 16px;
+  padding: 32px 16px 16px 16px;
   border: 1px solid black;
   border-radius: 16px;
   background-color: var(--bg-elevated);
@@ -910,6 +910,27 @@ tbody tr:last-child td {
 }
 #cart-form input[type=number] {
   width: 7ch;
+}
+
+#pickup-options label {
+  display: grid;
+  grid-template: "place radio" min-content "time radio" min-content/1fr min-content;
+  border-radius: 12px;
+  gap: 4px;
+}
+#pickup-options label .place {
+  grid-area: place;
+}
+#pickup-options label .time {
+  grid-area: time;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+#pickup-options label input[type=radio] {
+  grid-area: radio;
+  align-self: center;
 }
 
 main header {
@@ -974,7 +995,7 @@ main header details fieldset label:hover {
   background-color: var(--bg-elevated);
 }
 main header details fieldset label:has(:checked) {
-  border-color: var(--color-pink);
+  border-color: var(--color-secondary);
   background-color: var(--bg-elevated);
 }
 

@@ -68,6 +68,10 @@ const buildCartFromStorage = () => {
                 `,
             );
         });
+        const alert = document.getElementById("pickup-only-alert");
+        if (alert && cartItems.some((item) => item.pickupOnly))
+            alert.removeAttribute("hidden");
+        else alert.setAttribute("hidden", "");
     } else {
         // handle empty cart
         tbody.innerHTML = html`
@@ -99,13 +103,17 @@ const checkout = (cartItems, formData) => {
         }),
     })
         .then((response) => {
-            response.json().then((data) => {
-                if (data.success) {
-                    location.href = data.url;
-                } else {
-                    throw new Error(data.error);
-                }
-            });
+            if (response.ok) {
+                response.json().then((data) => {
+                    if (data.success) {
+                        location.href = data.url;
+                    } else {
+                        throw new Error(data.error);
+                    }
+                });
+            } else {
+                throw new Error(response.statusText);
+            }
         })
         .catch((error) => {
             toast(`Checkout Error: ${error?.message || error}`);
@@ -121,11 +129,11 @@ const embedPickupOptions = async () => {
     }
     // add form content
     formContent.innerHTML = html`
-        <fieldset>
+        <fieldset id="pickup-options">
             <legend>Please schedule your in-person pickup.</legend>
             <label>
-                <div>In Store - Charleston, TN</div>
-                <div>Pickup Anytime {Store Hours}</div>
+                <div class="place">In Store - Charleston, TN</div>
+                <div class="time">Pickup during store hours.</div>
                 <input type="radio" name="pickup" value="store" required />
             </label>
             <progress
@@ -139,10 +147,30 @@ const embedPickupOptions = async () => {
     const response = await fetch("/api/upcoming-events");
     document.getElementById("load-events-progress").replaceWith(
         ...(await response.json()).map((event) => {
+            const dates = (() => {
+                let start = Number(event?.startDate?._seconds);
+                start = isNaN(start)
+                    ? undefined
+                    : new Date(start * 1000).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                      });
+                let end = Number(event?.endDate?._seconds);
+                end = isNaN(end)
+                    ? undefined
+                    : new Date(end * 1000).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                      });
+                if (start && end)
+                    return `${start} - ${end} during event hours.`;
+                else if (start && !end) return `${start} during event hours.`;
+                else return "During event hours.";
+            })();
             return safeFragment`
                 <label>
-                    <div>${event.name} - ${event.city}, ${event.state}</div>
-                    <div>${event.dates} during event hours.</div>
+                    <div class="place">${event.name} - ${event.city}, ${event.state}</div>
+                    <div class="time">${dates}</div>
                     <input type="radio" name="pickup" value="${event.id}" />
                 </label>
             `;
@@ -246,21 +274,22 @@ form.addEventListener("submit", async (e) => {
         return;
     }
 
-    // determine fulfillment mehtod
-    const method = (() => {
-        if (formData.method === "pickup") return "pickup";
-        // some items must be picked up
-        if (cartItems.some((item) => item.pickupOnly)) {
-            if (cartItems.every((item) => item.pickupOnly)) return "pickup";
-            else return "mixed"; // mixed if some items can be shipped
-        } else {
-            return "shipment";
-        }
-    })();
-
     // proceed to checkout if pickup is scheduled
-    if (formData.pickup) checkout(cartItems, formData);
-    else
+    if (formData.pickup) {
+        checkout(cartItems, formData);
+    } else {
+        // determine fulfillment method
+        const method = (() => {
+            if (formData.method === "pickup") return "pickup";
+            // some items must be picked up
+            if (cartItems.some((item) => item.pickupOnly)) {
+                if (cartItems.every((item) => item.pickupOnly)) return "pickup";
+                else return "mixed"; // mixed if some items can be shipped
+            } else {
+                return "shipment";
+            }
+        })();
+
         switch (method) {
             case "shipment":
                 // or if no pickup is needed
@@ -269,4 +298,5 @@ form.addEventListener("submit", async (e) => {
             case "pickup":
                 await embedPickupOptions();
         }
+    }
 });

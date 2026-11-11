@@ -1,3 +1,5 @@
+@use "_typography" as typography;
+
 #list-utilities {
     z-index: 12;
     position: fixed;
@@ -17,7 +19,7 @@
     width: 480px;
     max-width: 98svw;
     margin: auto auto;
-    padding: 16px;
+    padding: 32px 16px 16px 16px;
     border: 1px solid black;
     border-radius: 16px;
     background-color: var(--bg-elevated);
@@ -52,5 +54,28 @@
 
     input[type="number"] {
         width: 7ch;
+    }
+}
+
+#pickup-options {
+    label {
+        display: grid;
+        grid-template:
+            "place radio" min-content
+            "time radio" min-content
+            / 1fr min-content;
+        border-radius: 12px;
+        gap: 4px;
+        .place {
+            grid-area: place;
+        }
+        .time {
+            grid-area: time;
+            @include typography.label;
+        }
+        input[type="radio"] {
+            grid-area: radio;
+            align-self: center;
+        }
     }
 }
