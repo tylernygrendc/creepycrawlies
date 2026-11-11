@@ -65,6 +65,7 @@ node_modules/
 .dataconnect
 
 # apple
+.DS_Store
 .DS_store
 
 # agent
