@@ -21,6 +21,17 @@
     --border-color: rgba(140, 169, 107, 0.12);
 }
 
+*:focus {
+    outline: none;
+}
+
+*:focus-visible {
+    border-radius: 2px;
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+    transition: outline-offset 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 body {
     background-color: var(--bg-primary);
     color: var(--text-primary);

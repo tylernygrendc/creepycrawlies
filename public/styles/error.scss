@@ -1,0 +1,28 @@
+@use "_theme";
+@use "_typography" as typography;
+@use "_resets";
+@use "_button";
+body {
+    padding: 16px;
+}
+
+h1 {
+    @extend .metal;
+    @include typography.display;
+    margin: 16px 0;
+}
+
+p {
+    @include typography.body;
+    width: 800px;
+    max-width: 90svw;
+    line-height: 1.5;
+    margin: 8px 0;
+}
+
+nav {
+    margin: 16px 0;
+    display: flex;
+    padding: 16px 0;
+    gap: 16px;
+}

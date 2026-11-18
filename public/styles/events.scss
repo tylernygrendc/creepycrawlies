@@ -1,7 +1,7 @@
 @use "_theme";
 @use "_typography" as typography;
 @use "_resets";
-@use "_button";
+@use "_button" as button;
 @use "_form-control";
 @use "_table";
 @use "_toast";
@@ -12,4 +12,53 @@
 
 main {
     padding: 16px;
+}
+
+#list-events {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    li {
+        h2 {
+            @include typography.label-large;
+            padding: 0 0 8px 4px;
+            border-bottom: 1px solid var(--border-color);
+            margin: 16px 0;
+        }
+    }
+}
+
+.event-card {
+    margin-left: 16px;
+    width: 400px;
+    max-width: 90svw;
+    h3 {
+        margin: 16px 0 8px 0;
+        @include typography.headline-small;
+    }
+    p {
+        margin: 16px 0;
+        @include typography.body;
+    }
+    ul {
+        margin-left: 8px;
+        li {
+            display: flex;
+            align-items: start;
+            padding: 0.125rem;
+            gap: 0.5rem;
+            @include typography.body;
+            text-wrap: pretty;
+            a {
+                color: var(--text-secondary);
+                text-underline-offset: 2px;
+            }
+        }
+    }
+    .actions {
+        display: flex;
+        align-items: center;
+        margin-top: 8px;
+        gap: 8px;
+    }
 }
