@@ -20,57 +20,102 @@
         <%- include("modules/global-header") %> 
         <main>
             <h1 id="h1-upcoming-events" class="display metal">Events</h1>
-            <ol aria-labelledby="h1-upcoming-events">
-                <% Array.from(new Set(events.map(event => new Date(event.startDate.seconds * 1000).toLocaleDateString("en-US", {
-                    month: "full"
-                })))).forEach(month => { %>
+            <ol id="list-events" aria-labelledby="h1-upcoming-events">
+                <% 
+                    const groupedEvents = events.reduce((acc, event) => {
+                        const key = new Date(Number(event.start.seconds) * 1000).toLocaleDateString("en-US", {
+                            month: "long",
+                            year: "numeric"
+                        });
+                        (acc[key] = acc[key === "Invalid Date" ? "TBD" : key] || []).push(event);
+                        return acc;
+                    }, {});
+                %>
+                <% console.log(groupedEvents) %> 
+                <% for (const [month, monthEvents] of Object.entries(groupedEvents)) { %>
                     <li>
                         <h2><%= month %></h2>
                         <ol>
-                            <% events.filter(event => new Date(event.startDate.seconds * 1000).toLocaleDateString("en-US", {
-                                    month: "full"
-                                } === month)).forEach(event => { %>
+                            <% monthEvents.forEach(event => { %>
                                 <li>
-                                    <article>
-                                        <h3><a href="<%= event.website %>"><%= event.name %></a></h3>
-                                        <p>
-                                            <span>
-                                                <% 
-                                                    const start = new Date(event.startDate.seconds * 1000);
-                                                    const end = new Date(event.endDate.seconds * 1000);
-                                                %>
-                                                <time datetime="<%= start.toISOString() %>"><%= start.toLocaleDateString("en-US", {
-                                                    month: "short",
-                                                    day: "numeric"
-                                                }) %></time>
-
-                                                <% if (event.endDate != event.startDate) { %>
-                                                    <span> through </span>
-                                                    <time datetime="<%= end.toISOString() %>"><%= end.toLocaleDateString("en-US", {
-                                                        month: "short",
-                                                        day: "numeric"
-                                                    }) %></time>
+                                    <% const eventHash = encodeURIComponent(String(event.title).replace(/\s/g,"-")) %> 
+                                    <article id="<%= eventHash %>" class="event-card">
+                                        <h3><%= event.title %></h3>
+                                        <p><%= event.description %></p>
+                                        <ul>
+                                            <li>
+                                                <i class="icon">location_on</i>
+                                                <span><%= event.location %></span>
+                                            </li>  
+                                            <li>
+                                                <% const start = new Date(Number(event.start.seconds) * 1000) %>
+                                                <% const end = new Date(Number(event.end.seconds) * 1000) %>
+                                                <% const singleDay = isNaN(end.getTime()) || start.getDate() === end.getDate() %>
+                                                <% const sameMonth = !singleDay && start && end && start.getMonth() === end.getMonth() %>
+                                                <i class="icon">schedule</i> 
+                                                <% if (!isNaN(start.getTime()) && singleDay) { %>
+                                                    <span>
+                                                        <time datetime="<%= start.toISOString() %>">
+                                                            <%= start.toLocaleDateString("en-US", {
+                                                                month: "short",
+                                                                day: "numeric"
+                                                            }) %>
+                                                        </time>
+                                                    </span>
+                                                <% } else if (!isNaN(start.getTime()) && !isNaN(end.getTime())) { %>
+                                                    <span>
+                                                        <time datetime="<%= start.toISOString() %>"><%= start.toLocaleDateString("en-US", {
+                                                            month: "short",
+                                                            day: "numeric"
+                                                        }) %></time>
+                                                        <span> - </span>
+                                                        <time datetime="<%= end.toISOString() %>"><%= end.toLocaleDateString("en-US", {
+                                                            ...(!sameMonth && {month: "short"}),
+                                                            day: "numeric"
+                                                        }) %></time>
+                                                    </span>
                                                 <% } %>
-                                                
-                                            </span>
-                                            <br>
-                                            <a href="<%= event.mapsLink %>"><%= event.venueName %> | <%= event.city %>, <%= event.state %></a>
-
-                                            <br>
-                                            <span><%= event.description %> </span>
-                                        </p>
-                                        <button type="button" class="btn btn-primary">Add to Calendar</button>
-                                        <button type="button" data-url="https://fang-farm.web.app/events/<%= event.id %>" class="btn btn-secondary icon">share</button>
+                                            </li>
+                                            <li>
+                                                <i class="icon">directions</i>
+                                                <a href="<%= event.mapsLink %>" ><%= event.street %> <wbr><%= event.city %>, <%= event.state %> <%= event.zip %></a>
+                                            </li>
+                                            <% if (event?.website) { %>
+                                                <li>
+                                                    <i class="icon">link</i>
+                                                    <a href="<%= event.website %>">
+                                                        <%= event.website.replace(/^(https?:\/\/)?|\/$|\?.*/g, "")%>
+                                                    </a>
+                                                </li>
+                                            <% } %>
+                                        </ul>
+                                        <div class="actions">
+                                            <button 
+                                                type="button" 
+                                                class="btn btn-secondary"
+                                                data-event="<%= JSON.stringify(event) %>"
+                                                >
+                                                Add to Calendar
+                                            </button>
+                                            <button 
+                                                type="button" 
+                                                data-event-title="<%= event.title %>"
+                                                data-event-end="<%= event.end.seconds * 1000 %>"
+                                                data-event-start="<%= event.start.seconds * 1000 %>"
+                                                data-share-url="https://fang-farm.web.app/events#<%= eventHash %>" 
+                                                class="btn btn-text icon">share</button>
+                                        </div>
                                         <script type="application/ld+json"><%- event.schema %> </script>
                                     </article>
                                 </li>
                             <% }); %>
                         </ol>
                     </li>
-                <% }); %>
+                <% } %>
             </ol>
         </main>
         <%- include("modules/global-footer")  %> 
+        <script src="/scripts/events.min.js"></script>
     </body>
 </html>
 
