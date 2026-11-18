@@ -40,10 +40,8 @@ formEventEditor.addEventListener("submit", async (e) => {
                     : formData;
 
                 // format dates
-                if (updatedEventData.startDate) {
-                    updatedEventData.startDate = new Date(
-                        updatedEventData.startDate,
-                    )
+                if (updatedEventData.start) {
+                    updatedEventData.start = new Date(updatedEventData.start)
                         .toLocaleDateString("en-US", {
                             day: "2-digit",
                             month: "2-digit",
@@ -51,10 +49,8 @@ formEventEditor.addEventListener("submit", async (e) => {
                         })
                         .replaceAll("/", "-");
                 }
-                if (updatedEventData.endDate) {
-                    updatedEventData.endDate = new Date(
-                        updatedEventData.endDate,
-                    )
+                if (updatedEventData.end) {
+                    updatedEventData.end = new Date(updatedEventData.end)
                         .toLocaleDateString("en-US", {
                             day: "2-digit",
                             month: "2-digit",
@@ -64,10 +60,10 @@ formEventEditor.addEventListener("submit", async (e) => {
                 }
 
                 const rowData = [
-                    "name",
-                    "startDate",
-                    "endDate",
-                    "venueName",
+                    "title",
+                    "start",
+                    "end",
+                    "location",
                     "city",
                     "state",
                 ].reduce((acc, cv, i, array) => {
