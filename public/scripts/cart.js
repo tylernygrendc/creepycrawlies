@@ -156,14 +156,14 @@ const embedPickupOptions = async () => {
     document.getElementById("load-events-progress").replaceWith(
         ...(await response.json()).map((event) => {
             const dates = (() => {
-                let start = Number(event?.startDate?._seconds);
+                let start = Number(event?.start?._seconds);
                 start = isNaN(start)
                     ? undefined
                     : new Date(start * 1000).toLocaleDateString("en-US", {
                           month: "short",
                           day: "numeric",
                       });
-                let end = Number(event?.endDate?._seconds);
+                let end = Number(event?.end?._seconds);
                 end = isNaN(end)
                     ? undefined
                     : new Date(end * 1000).toLocaleDateString("en-US", {
@@ -177,7 +177,7 @@ const embedPickupOptions = async () => {
             })();
             return safeFragment`
                 <label>
-                    <div class="place">${event.name} - ${event.city}, ${event.state}</div>
+                    <div class="place">${event.title} - ${event.city}, ${event.state}</div>
                     <div class="time">${dates}</div>
                     <input type="radio" name="pickup" value="${event.id}" />
                 </label>
