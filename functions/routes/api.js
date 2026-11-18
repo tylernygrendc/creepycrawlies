@@ -19,7 +19,8 @@ export const getUpcomingEvents = async () => {
 
     const eventSnapshot = await getFirestore()
         .collection("events")
-        .where("startDate", ">", minStartDate)
+        .where("start", ">", minStartDate)
+        .orderBy("start", "asc")
         .get();
 
     cachedEvents = eventSnapshot.docs.map((doc) => ({

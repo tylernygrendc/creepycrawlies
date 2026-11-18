@@ -147,25 +147,25 @@ router.get("/events", async (req, res, next) => {
     try {
         const eventsSnapshot = await getFirestore()
             .collection("events")
-            .where("endDate", ">", new Date().setDate(new Date().getDate() - 2))
+            .orderBy("start", "asc")
             .get();
         const events = eventsSnapshot.docs.map((doc) => ({
             id: doc.id,
             ...(doc.data() || {}),
         }));
         events.map((event) => {
-            item.schema = JSON.stringify({
+            event.schema = JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "Event",
-                name: event.name,
-                startDate: event.startDate,
-                endDate: event.endDate,
+                name: event.name || event.title,
+                startDate: event.start,
+                endDate: event.end,
                 eventAttendanceMode:
                     event.attendanceMode || "https://schema.org",
                 eventStatus: "https://schema.org",
                 location: {
                     "@type": "Place",
-                    name: event.venueName,
+                    name: event.location,
                     address: {
                         "@type": "PostalAddress",
                         streetAddress: event.street,
@@ -178,14 +178,13 @@ router.get("/events", async (req, res, next) => {
                 description: event.description,
                 organizer: {
                     "@type": "Organization",
-                    name: event.organizerName,
-                    url: event.organizerUrl,
+                    name: event.organizer,
+                    url: event.website,
                 },
                 attendee: {
                     "@type": "Organization",
-                    name: event.vendorName,
-                    url: event.vendorUrl,
-                    image: event.vendorLogo,
+                    name: "The Fang Farm",
+                    url: "thefangfam.com",
                 },
             });
         });

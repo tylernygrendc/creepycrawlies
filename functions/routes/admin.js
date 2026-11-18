@@ -69,7 +69,10 @@ router.get("/dashboard/:resource", requireAuth, async (req, res, next) => {
             case "events": {
                 // get events
                 let events;
-                const eventsSnapshot = await db.collection("events").get();
+                const eventsSnapshot = await db
+                    .collection("events")
+                    .orderBy("start", "asc")
+                    .get();
                 if (!eventsSnapshot.empty)
                     events = eventsSnapshot.docs.map((doc) => ({
                         id: doc.id,
@@ -275,18 +278,18 @@ router.post("/items/upsert", requireAuth, async (req, res, next) => {
 router.post("/events/upsert", requireAuth, async (req, res, next) => {
     if (req.body.id) {
         // parse dates
-        if (req.body.startDate) {
-            req.body.startDate = new Date(req.body.startDate);
+        if (req.body.start) {
+            req.body.start = new Date(req.body.start);
             // startDate must be valid
-            if (isNaN(req.body.startDate.getTime()))
-                throw new Error("Invalid event startDate");
+            if (isNaN(req.body.start.getTime()))
+                throw new Error("Invalid event start date.");
         }
 
-        if (req.body.endDate) {
-            req.body.endDate = new Date(req.body.endDate);
+        if (req.body.end) {
+            req.body.end = new Date(req.body.end);
             // startDate must be valid
-            if (isNaN(req.body.startDate.getTime()))
-                throw new Error("Invalid event endDate");
+            if (isNaN(req.body.end.getTime()))
+                throw new Error("Invalid event end date.");
         }
 
         await getFirestore()
