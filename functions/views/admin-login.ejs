@@ -80,7 +80,7 @@
                         });
 
                         if (response.ok) {
-                            window.location.assign("/admin/dashboard");
+                            window.location.assign("/admin/dashboard/orders");
                         } else {
                             const data = await response.json();
                             throw new Error(
