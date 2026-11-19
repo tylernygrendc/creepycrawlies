@@ -1,0 +1,205 @@
+//* Colors
+
+:root {
+    /* Backgrounds */
+    --bg-primary: #12160f;
+    --bg-secondary: #1b2217;
+    --bg-elevated: #242d1f;
+
+    /* Text */
+    --text-primary: #f1f5f1;
+    --text-secondary: #9da896;
+
+    /* Primary Accents */
+    --color-primary: #8ca96b;
+    --color-primary-dark: #657e4c;
+    --color-primary-glow: rgba(140, 169, 107, 0.15);
+
+    /* Secondary & Highlight */
+    --color-secondary: #f472b6;
+    --color-secondary-highlight: #d946ef;
+
+    /* UI Feedback */
+    --border-color: rgba(140, 169, 107, 0.12);
+}
+
+//* Brand Font (New Rocker)
+
+@font-face {
+    font-family: "New Rocker";
+    src: url("../fonts/NewRocker-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* 2. Android Fallback (Roboto) */
+@font-face {
+    font-family: "New Rocker Fallback Android";
+    src: local("Roboto"), local("Roboto-Regular");
+    size-adjust: 104.5%;
+    ascent-override: 90.5%;
+    descent-override: 27.1%;
+    line-gap-override: 0%;
+}
+
+/* 3. Windows & Apple Fallback (Arial / Times) */
+@font-face {
+    font-family: "New Rocker Fallback Arial";
+    src: local("Arial"), local("ArialMT");
+    size-adjust: 104.8%;
+    ascent-override: 90.3%;
+    descent-override: 27.0%;
+    line-gap-override: 0%;
+}
+
+.brand-font {
+    font-family:
+        "New Rocker", "New Rocker Fallback Android",
+        "New Rocker Fallback Arial", cursive, serif;
+}
+
+//* Material Symbols
+
+@font-face {
+    font-family: "Material Symbols";
+    src: url("../fonts/material-symbols.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 100 700;
+    font-display: block;
+}
+
+.icon {
+    font-family: "Material Symbols" !important;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px !important;
+    line-height: 1;
+    display: inline-block;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "liga";
+}
+
+//* Body Font (EB Garamond)
+
+@font-face {
+    font-family: "EB Garamond";
+    src: url("../fonts/EBGaramond-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "EB Garamond";
+    src: url("../fonts/EBGaramond-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "EB Garamond";
+    src: url("../fonts/EBGaramond-Italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* 1. Windows Fallback (Georgia / Times New Roman) */
+@font-face {
+    font-family: "EB Garamond Fallback Windows";
+    src: local("Georgia"), local("Times New Roman");
+    size-adjust: 83.1%;
+    ascent-override: 100.7%;
+    descent-override: 29.8%;
+    line-gap-override: 0%;
+}
+
+/* 2. macOS / iOS Fallback (Georgia / Times) */
+@font-face {
+    font-family: "EB Garamond Fallback Apple";
+    src: local("Georgia"), local("Times");
+    size-adjust: 83.1%;
+    ascent-override: 100.7%;
+    descent-override: 29.8%;
+    line-gap-override: 0%;
+}
+
+/* 3. Android Fallback (Noto Serif / Roboto Serif) */
+@font-face {
+    font-family: "EB Garamond Fallback Android";
+    src: local("Noto Serif"), local("Roboto Serif"), local("Droid Serif");
+    size-adjust: 84.5%;
+    ascent-override: 99.2%;
+    descent-override: 28.5%;
+    line-gap-override: 0%;
+}
+
+/* 4. Linux Fallback (Liberation Serif) */
+@font-face {
+    font-family: "EB Garamond Fallback Linux";
+    src: local("Liberation Serif");
+    size-adjust: 83.5%;
+    ascent-override: 100.5%;
+    descent-override: 29.6%;
+    line-gap-override: 0%;
+}
+
+body,
+.body-font {
+    font-family:
+        "EB Garamond", "EB Garamond Fallback Apple",
+        "EB Garamond Fallback Windows", "EB Garamond Fallback Android",
+        "EB Garamond Fallback Linux", serif;
+}
+
+*:focus {
+    outline: none;
+}
+
+*:focus-visible {
+    border-radius: 2px;
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+    transition: outline-offset 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+input[type="checkbox"] {
+    accent-color: var(--color-secondary);
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+input[type="radio"] {
+    accent-color: var(--color-secondary);
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+fieldset:has(input[type="radio"]:checked) label:has(input:not(:checked)) > * {
+    opacity: 0.6;
+}
+
+input[type="range"] {
+    accent-color: var(--color-secondary);
+    width: 200px;
+}
+
+progress {
+    accent-color: var(--color-secondary);
+    width: 200px;
+    height: 12px;
+}

@@ -1,7 +1,6 @@
-@use "_theme";
 @use "_typography" as typography;
 @use "_resets";
-@use "_button";
+@use "_button" as button;
 @use "_form-control";
 @use "_table";
 @use "_toast";
@@ -24,8 +23,7 @@ main header {
             position: relative;
             list-style: none;
             width: 100%;
-            @extend .btn;
-            @extend .btn-secondary;
+            @include button.secondary;
             &::after {
                 content: "filter_list";
                 font-family: "Material Symbols";
