@@ -1,7 +1,11 @@
 @use "_typography.scss" as typography;
 
-/* Base Form Controls (Inputs & Textareas) */
-.form-control {
+/* ==========================================================================
+   Form Control Mixins
+   ========================================================================== */
+
+/* Base Form Control (Inputs, Textareas, Selects) */
+@mixin base {
     width: 100%;
     padding: 0.75rem 1rem;
     font-family: inherit;
@@ -17,31 +21,65 @@
         box-shadow 0.2s ease,
         background-color 0.2s ease;
     appearance: none;
+
+    &:hover {
+        background-color: var(--bg-elevated);
+        border-color: rgba(140, 169, 107, 0.3);
+    }
+
+    &::placeholder {
+        color: var(--text-secondary);
+        opacity: 0.7;
+    }
+
+    &:focus {
+        outline: none;
+        background-color: var(--bg-elevated);
+        border-color: var(--color-primary);
+        box-shadow:
+            0 0 0 3px var(--color-primary-glow),
+            0 0 8px rgba(244, 114, 182, 0.15);
+    }
+
+    &.is-invalid {
+        border-color: var(--color-secondary);
+        box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.2);
+    }
+
+    &:disabled,
+    &[readonly] {
+        opacity: 0.55;
+        cursor: not-allowed;
+        background-color: var(--bg-primary);
+        border-color: var(--border-color);
+    }
 }
 
-/* Hover & Elevated States */
-.form-control:hover {
-    background-color: var(--bg-elevated);
-    border-color: rgba(140, 169, 107, 0.3);
+/* Textarea Specifics */
+@mixin textarea {
+    @include base;
+    min-height: 120px;
+    resize: vertical;
 }
 
-/* Placeholder Styling */
-.form-control::placeholder {
-    color: var(--text-secondary);
-    opacity: 0.7;
+/* Custom Select Dropdown Styling */
+@mixin select {
+    @include base;
+    cursor: pointer;
+    padding-right: 2.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238ca96b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+
+    option {
+        background-color: var(--bg-secondary);
+        color: var(--text-primary);
+    }
 }
 
-/* Interactive Focus State (Olive glow with pink accent hint) */
-.form-control:focus {
-    outline: none;
-    background-color: var(--bg-elevated);
-    border-color: var(--color-primary);
-    box-shadow:
-        0 0 0 3px var(--color-primary-glow),
-        0 0 8px rgba(244, 114, 182, 0.15);
-}
-
-label:has(.form-control) {
+/* Label Helper Mixin */
+@mixin label {
     div,
     span {
         @include typography.label-large;
@@ -49,38 +87,22 @@ label:has(.form-control) {
     }
 }
 
-/* Textarea Specifics */
+/* ==========================================================================
+   CSS Utility Classes
+   ========================================================================== */
+
+.form-control {
+    @include base;
+}
+
 textarea.form-control {
-    min-height: 120px;
-    resize: vertical;
+    @include textarea;
 }
 
-/* Custom Select Dropdown Styling */
 select.form-control {
-    cursor: pointer;
-    padding-right: 2.5rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238ca96b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 1rem;
+    @include select;
 }
 
-select.form-control option {
-    background-color: var(--bg-secondary);
-    color: var(--text-primary);
-}
-
-/* Validation & Feedback States */
-.form-control.is-invalid {
-    border-color: var(--color-secondary);
-    box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.2);
-}
-
-/* Disabled State */
-.form-control:disabled,
-.form-control[readonly] {
-    opacity: 0.55;
-    cursor: not-allowed;
-    background-color: var(--bg-primary);
-    border-color: var(--border-color);
+label:has(.form-control) {
+    @include label;
 }

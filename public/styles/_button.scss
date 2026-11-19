@@ -1,5 +1,9 @@
+/* ==========================================================================
+   Button Mixins
+   ========================================================================== */
+
 /* Base Button Styling */
-.btn {
+@mixin base {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -15,31 +19,45 @@
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     outline: none;
     box-sizing: border-box;
+
+    &:focus-visible {
+        outline: 2px solid var(--color-secondary);
+        outline-offset: 2px;
+    }
+
+    &:disabled,
+    &.disabled {
+        cursor: not-allowed;
+        transform: none !important;
+        box-shadow: none !important;
+    }
 }
 
 /* Primary Button (Olive Theme) */
-.btn-primary {
+@mixin primary {
+    @include base;
     background-color: var(--color-primary);
     color: var(--bg-primary);
     border: 1px solid var(--color-primary);
     box-shadow: 0 4px 12px var(--color-primary-glow);
-}
 
-.btn-primary:hover {
-    background-color: var(--color-primary-dark);
-    border-color: var(--color-primary-dark);
-    color: var(--text-primary);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(140, 169, 107, 0.25);
-}
+    &:hover {
+        background-color: var(--color-primary-dark);
+        border-color: var(--color-primary-dark);
+        color: var(--text-primary);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(140, 169, 107, 0.25);
+    }
 
-.btn-primary:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 8px var(--color-primary-glow);
+    &:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 8px var(--color-primary-glow);
+    }
 }
 
 /* Accent Button (Vibrant Pink/Magenta Gradient) */
-.btn-accent {
+@mixin accent {
+    @include base;
     background: linear-gradient(
         135deg,
         var(--color-secondary),
@@ -48,51 +66,65 @@
     color: var(--bg-primary);
     border: 1px solid transparent;
     box-shadow: 0 4px 14px rgba(244, 114, 182, 0.25);
-}
 
-.btn-accent:hover {
-    filter: brightness(1.1);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(217, 70, 239, 0.35);
-}
+    &:hover {
+        filter: brightness(1.1);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(217, 70, 239, 0.35);
+    }
 
-.btn-accent:active {
-    transform: translateY(0);
-    filter: brightness(0.95);
+    &:active {
+        transform: translateY(0);
+        filter: brightness(0.95);
+    }
 }
 
 /* Secondary / Outline Button */
-.btn-secondary {
+@mixin secondary {
+    @include base;
     background-color: var(--bg-secondary);
     color: var(--text-primary);
     border: 1px solid var(--border-color);
+
+    &:hover {
+        background-color: var(--bg-elevated);
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+    }
 }
 
-.btn-secondary:hover {
-    background-color: var(--bg-elevated);
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-}
-
-.btn-text {
+/* Text Button */
+@mixin text {
+    @include base;
     background-color: transparent;
     color: var(--text-secondary);
     border: none;
+
+    &:hover {
+        color: var(--text-primary);
+    }
 }
 
-.btn-text:hover {
-    color: var(--text-primary);
+/* ==========================================================================
+   CSS Utility Classes
+   ========================================================================== */
+
+.btn {
+    @include base;
 }
 
-/* Focus and Disabled States */
-.btn:focus-visible {
-    outline: 2px solid var(--color-secondary);
-    outline-offset: 2px;
+.btn-primary {
+    @include primary;
 }
 
-.btn:disabled,
-.btn.disabled {
-    cursor: not-allowed;
-    transform: none !important;
-    box-shadow: none !important;
+.btn-accent {
+    @include accent;
+}
+
+.btn-secondary {
+    @include secondary;
+}
+
+.btn-text {
+    @include text;
 }
