@@ -8,13 +8,15 @@ router.use((req, res, next) => {
     next();
 });
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
     try {
         res.set(
             "Cache-Control",
             "public, max-age=0, s-maxage=86400, stale-while-revalidate=600",
         ); // updates daily
-        res.render("index", {
+
+        const viewName = req.brand === "podpro" ? "home-pod-pro" : "home-farm";
+        res.render(viewName, {
             featuredItems: [],
         });
     } catch (error) {

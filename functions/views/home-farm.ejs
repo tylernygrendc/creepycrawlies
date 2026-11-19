@@ -6,7 +6,7 @@
         <title>The Fang Farm</title>
         <meta
             name="description"
-            content="Shop all inverts and plants from The Fang Farm."
+            content="Shop tarantulas from The Fang Farm."
         />
         <!-- open graph card -->
         <meta property="og:title" content="The Fang Farm Catalog" />
@@ -19,7 +19,8 @@
         />
         <meta property="og:site_name" content="thefangfarm.com" />
         <!-- styles -->
-        <link rel="stylesheet" href="styles/home.css">
+        <link rel="stylesheet" href="<%= themeCss %>">
+        <link rel="stylesheet" href="/styles/home.css">
     </head>
     <body>
         <%- include("modules/global-nav") %> <%-
@@ -30,8 +31,8 @@
                 <h1 class="title">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
                 <nav id="nav-call-to-action">
                     <ul>
-                        <li><a class="btn btn-accent" href="">Shop</a></li>
-                        <li><a class="btn btn-text" href="">About Us</a></li>
+                        <li><a class="btn btn-accent" href="/catalog/tarantuals">Shop Tarantulas</a></li>
+                        <li><a class="btn btn-text" href="#about-us">About Us</a></li>
                     </ul>
                 </nav>
             </header>
@@ -49,6 +50,9 @@
             </section>
             <section aria-labelledby="heading-recent-items" hidden>
                 <h2 id="heading-recent-items">Recent Items</h2>
+            </section>
+            <section id="about-us">
+                <h2>About</h2>
             </section>
         </main>
     </body>

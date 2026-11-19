@@ -34,6 +34,36 @@ publicExpressApp.use(cookieParser());
 adminExpressApp.use(express.json());
 adminExpressApp.use(cookieParser());
 
+// Middleware to detect brand from the requested host
+const brandDetectionMiddleware = (req, res, next) => {
+    const rawHost = (
+        req.headers["x-forwarded-host"] ||
+        req.hostname ||
+        ""
+    ).toLowerCase();
+    const host = rawHost.split(":")[0];
+
+    // Determine brand: "podpro" vs "fangfarm"
+    if (host.includes("thepodpro") || host.includes("podpro")) {
+        req.brand = "podpro";
+    } else {
+        req.brand = "fangfarm";
+    }
+
+    // Expose brand info and theme stylesheet to res.locals for EJS templates
+    res.locals.brand = req.brand;
+    res.locals.isPodPro = req.brand === "podpro";
+    res.locals.brandName = req.brand === "podpro" ? "The Pod Pro" : "The Fang Farm";
+    res.locals.brandDomain = req.brand === "podpro" ? "thepodpro.org" : "thefangfarm.com";
+    res.locals.themeCss = req.brand === "podpro" ? "/styles/theme-pod-pro.css" : "/styles/theme-fang-farm.css";
+
+    next();
+};
+
+// Mount the brand detection middleware
+publicExpressApp.use(brandDetectionMiddleware);
+adminExpressApp.use(brandDetectionMiddleware);
+
 // Mount the routers for the public app
 publicExpressApp.use("/api", apiRouter);
 publicExpressApp.use("/", router);
@@ -43,6 +73,15 @@ publicExpressApp.use("/", router);
 adminExpressApp.get("/", (req, res) => res.redirect("/admin/login"));
 adminExpressApp.use(
     "/admin",
+    (req, res, next) => {
+        res.setHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
+        next();
+    },
+    adminRouter,
+);
+// Also mount adminRouter on root for admin.subdomains (e.g. admin.thefangfarm.com/login)
+adminExpressApp.use(
+    "/",
     (req, res, next) => {
         res.setHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
         next();
