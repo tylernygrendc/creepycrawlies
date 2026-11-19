@@ -15,7 +15,8 @@ router.get("/", async (req, res, next) => {
             "public, max-age=0, s-maxage=86400, stale-while-revalidate=600",
         ); // updates daily
 
-        const viewName = req.brand === "podpro" ? "home-pod-pro" : "home-farm";
+        const viewName =
+            req.brand === "podpro" ? "home-pod-pro" : "home-fang-farm";
         res.render(viewName, {
             featuredItems: [],
         });

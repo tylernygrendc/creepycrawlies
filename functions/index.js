@@ -53,9 +53,15 @@ const brandDetectionMiddleware = (req, res, next) => {
     // Expose brand info and theme stylesheet to res.locals for EJS templates
     res.locals.brand = req.brand;
     res.locals.isPodPro = req.brand === "podpro";
-    res.locals.brandName = req.brand === "podpro" ? "The Pod Pro" : "The Fang Farm";
-    res.locals.brandDomain = req.brand === "podpro" ? "thepodpro.org" : "thefangfarm.com";
-    res.locals.themeCss = req.brand === "podpro" ? "/styles/theme-pod-pro.css" : "/styles/theme-fang-farm.css";
+    res.locals.isFangFarm = req.brand === "fangfarm";
+    res.locals.brandName =
+        req.brand === "podpro" ? "The Pod Pro" : "The Fang Farm";
+    res.locals.brandDomain =
+        req.brand === "podpro" ? "thepodpro.org" : "thefangfarm.com";
+    res.locals.themeCss =
+        req.brand === "podpro"
+            ? "/styles/theme-pod-pro.css"
+            : "/styles/theme-fang-farm.css";
 
     next();
 };
