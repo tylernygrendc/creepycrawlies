@@ -1,0 +1,215 @@
+//* Colors
+
+:root {
+    /* Backgrounds */
+    --bg-primary: #130f16;
+    --bg-secondary: #1d1722;
+    --bg-elevated: #281f2d;
+
+    /* Text */
+    --text-primary: #f4f1f5;
+    --text-secondary: #a396a8;
+
+    /* Primary Accents (Rotated 180° to Purple / Violet) */
+    --color-primary: #886ba9;
+    --color-primary-dark: #654c7e;
+    --color-primary-glow: rgba(136, 107, 169, 0.15);
+
+    /* Secondary & Highlight (Rotated 180° to Lime / Emerald) */
+    --color-secondary: #72f4b0;
+    --color-secondary-highlight: #46ef5c;
+
+    /* UI Feedback */
+    --border-color: rgba(136, 107, 169, 0.12);
+}
+
+//* Brand Font (Metal Mania)
+
+@font-face {
+    font-family: "Metal Mania";
+    src: url("../fonts/MetalMania-Regular.woff2") format("woff2");
+    font-weight: 400; // must match symbols.config.js
+    font-style: normal;
+    font-display: swap;
+}
+
+/* 2. Android Fallback (Roboto) */
+@font-face {
+    font-family: "Metal Mania Fallback Android";
+    src: local("Roboto"), local("Roboto-Regular");
+    size-adjust: 117.2%;
+    ascent-override: 93.8%;
+    descent-override: 29.4%;
+    line-gap-override: 0%;
+}
+
+/* 3. Windows & Apple Fallback (Arial) */
+@font-face {
+    font-family: "Metal Mania Fallback Arial";
+    src: local("Arial"), local("ArialMT");
+    size-adjust: 116.76%;
+    ascent-override: 94.24%;
+    descent-override: 29.59%;
+    line-gap-override: 0%;
+}
+
+.brand-font {
+    font-family:
+        "Metal Mania", "Metal Mania Fallback Android",
+        "Metal Mania Fallback Arial", serif;
+}
+
+//* Material Symbols
+
+@font-face {
+    font-family: "Material Symbols";
+    src: url("../fonts/material-symbols.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 100 700;
+    font-display: block;
+}
+
+.icon {
+    font-family: "Material Symbols" !important;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px !important;
+    line-height: 1;
+    display: inline-block;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "liga";
+}
+
+//* Body Font (Cabin)
+
+@font-face {
+    font-family: "Cabin";
+    src: url("../fonts/Cabin-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Cabin";
+    src: url("../fonts/Cabin-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Cabin";
+    src: url("../fonts/Cabin-Italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* 1. Windows Fallback */
+@font-face {
+    font-family: "Cabin Fallback Arial";
+    src: local("Arial");
+    size-adjust: 94.49%;
+    ascent-override: 102.13%;
+    descent-override: 26.46%;
+    line-gap-override: 0%;
+}
+
+/* 2. macOS Fallback */
+@font-face {
+    font-family: "Cabin Fallback Helvetica";
+    src: local("Helvetica");
+    size-adjust: 98.41%;
+    ascent-override: 98.06%;
+    descent-override: 25.4%;
+    line-gap-override: 0%;
+}
+
+/* 3. iOS Fallback (San Francisco) */
+@font-face {
+    font-family: "Cabin Fallback iOS";
+    src: local("-apple-system"), local("BlinkMacSystemFont");
+    size-adjust: 98.11%;
+    ascent-override: 97.85%;
+    descent-override: 25.48%;
+    line-gap-override: 0%;
+}
+
+/* 4. Android Fallback (Roboto) */
+@font-face {
+    font-family: "Cabin Fallback Android";
+    src: local("Roboto"), local("Roboto-Regular");
+    size-adjust: 94.88%;
+    ascent-override: 101.71%;
+    descent-override: 26.35%;
+    line-gap-override: 0%;
+}
+
+/* 5. Linux Fallback */
+@font-face {
+    font-family: "Cabin Fallback Linux";
+    src: local("Liberation Sans");
+    size-adjust: 95.34%;
+    ascent-override: 101.22%;
+    descent-override: 26.22%;
+    line-gap-override: 0%;
+}
+
+body,
+.body-font {
+    font-family:
+        "Cabin", "Cabin Fallback iOS", "Cabin Fallback Android",
+        "Cabin Fallback Arial", "Cabin Fallback Helvetica",
+        "Cabin Fallback Linux", system-ui, sans-serif;
+}
+
+*:focus {
+    outline: none;
+}
+
+*:focus-visible {
+    border-radius: 2px;
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+    transition: outline-offset 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+input[type="checkbox"] {
+    accent-color: var(--color-secondary);
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+input[type="radio"] {
+    accent-color: var(--color-secondary);
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+fieldset:has(input[type="radio"]:checked) label:has(input:not(:checked)) > * {
+    opacity: 0.6;
+}
+
+input[type="range"] {
+    accent-color: var(--color-secondary);
+    width: 200px;
+}
+
+progress {
+    accent-color: var(--color-secondary);
+    width: 200px;
+    height: 12px;
+}
